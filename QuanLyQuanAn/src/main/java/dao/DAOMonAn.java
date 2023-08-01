@@ -32,7 +32,27 @@ public class DAOMonAn implements DAOCRUDInterface<MonAn> {
 
 	@Override
 	public void put(MonAn t, long id) {
-		// TODO Auto-generated method stub
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session ss =  sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		// Get object on id
+		t = ss.get(MonAn.class, id);
+		
+		// Transaction status
+		ss.evict(t);
+		
+		
+		// Temp data for test function
+		// Set new value for object
+		t.setName("Bun rieu");
+		t.setPrice(16.0f);
+		
+		// Persist object
+		ss.merge(t);
+		
+		tr.commit();
+		ss.close();
 		
 	}
 
@@ -53,5 +73,4 @@ public class DAOMonAn implements DAOCRUDInterface<MonAn> {
 		tr.commit();
 		ss.close();
 	}
-
 }

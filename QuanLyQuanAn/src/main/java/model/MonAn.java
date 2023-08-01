@@ -25,16 +25,6 @@ public class MonAn {
 	
 	public MonAn() {}
 	
-	
-	@Autowired
-	public MonAn(long id, String name, int quantity, Boolean state) {
-		this.id = id;
-		this.name = name;
-		this.quantity = quantity;
-		this.state = state;
-	}
-
-
 	public MonAn(long id, String name, int quantity, Boolean state, Float price) {
 		this.id = id;
 		this.name = name;
@@ -43,12 +33,9 @@ public class MonAn {
 		this.price = price;
 	}
 
-
-	
 	public long getId() {
 		return id;
 	}
-
 
 	public void setId(long id) {
 		this.id = id;
@@ -57,7 +44,6 @@ public class MonAn {
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;

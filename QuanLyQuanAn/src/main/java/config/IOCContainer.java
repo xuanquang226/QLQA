@@ -11,9 +11,4 @@ import model.MonAn;
 @ComponentScan(value = "model")
 public class IOCContainer {
 
-	@Bean
-	public MonAn monAn() {
-		return new MonAn(2, "Nguyen Thuy Thuy Trang", 2, true);
-	}
-
 }
