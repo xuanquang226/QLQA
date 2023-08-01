@@ -42,7 +42,7 @@ public class QuanLyQuanAnApplication {
 //		
 //		
 //		ArrayList<MonAn> monAns = new ArrayList<MonAn>();
-//		monAns.add(ma1);
+//		monAns.add(ma1)  ;
 //		DonHang dh1 = (DonHang) context.getBean(DonHang.class);
 //		dh1.setMonAns(monAns);
 //		dh1.setIdDH(1);
