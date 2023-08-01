@@ -8,12 +8,12 @@ import controller.RestMonAn;
 import model.MonAn;
 
 @Configuration
-@ComponentScan(value="model")
+@ComponentScan(value = "model")
 public class IOCContainer {
 
 	@Bean
 	public MonAn monAn() {
-		return new MonAn(1,"AAA",2, true, 4.0F);
+		return new MonAn(2, "Nguyen Thuy Thuy Trang", 2, true);
 	}
-		
+
 }

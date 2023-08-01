@@ -25,6 +25,16 @@ public class MonAn {
 	
 	public MonAn() {}
 	
+	
+	@Autowired
+	public MonAn(long id, String name, int quantity, Boolean state) {
+		this.id = id;
+		this.name = name;
+		this.quantity = quantity;
+		this.state = state;
+	}
+
+
 	public MonAn(long id, String name, int quantity, Boolean state, Float price) {
 		this.id = id;
 		this.name = name;

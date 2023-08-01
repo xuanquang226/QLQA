@@ -12,7 +12,7 @@ import util.HibernateUtil;
 
 
 @Repository
-public class DAOMonAn implements DAOInterface<MonAn> {
+public class DAOMonAn implements DAOCRUDInterface<MonAn> {
 
 	@Override
 	public MonAn get(long id) {
@@ -45,8 +45,13 @@ public class DAOMonAn implements DAOInterface<MonAn> {
 	@Override
 	public void post(MonAn t) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session ss =  sf.openSession();
+		Transaction tr = ss.beginTransaction();
 		
+		ss.merge(t);
 		
+		tr.commit();
+		ss.close();
 	}
 
 }

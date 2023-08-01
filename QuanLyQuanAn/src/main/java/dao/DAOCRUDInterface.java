@@ -1,6 +1,6 @@
 package dao;
 
-public interface DAOInterface<T> {
+public interface DAOCRUDInterface<T> {
 	T get(long id);
 	void put(T t, long id);
 	void delete(long id);

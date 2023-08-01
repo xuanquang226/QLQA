@@ -48,9 +48,6 @@ public class QuanLyQuanAnApplication {
 //		dh1.setIdDH(1);
 //		
 //		System.out.println(dh1.getMonAns().get(0).getName());
-		
-		
-		
 	}
 
 }
