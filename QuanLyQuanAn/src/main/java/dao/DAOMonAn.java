@@ -68,7 +68,7 @@ public class DAOMonAn implements DAOCRUDInterface<MonAn> {
 		Session ss =  sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
-		ss.merge(t);
+		ss.save(t);
 		
 		tr.commit();
 		ss.close();

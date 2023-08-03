@@ -2,6 +2,7 @@ package model;
 
 import org.hibernate.id.factory.spi.GenerationTypeStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Entity;
@@ -13,6 +14,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "MonAn")
 @Component
+@Scope("prototype")
 public class MonAn {
 	
 	@Id
