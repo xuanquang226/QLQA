@@ -27,27 +27,7 @@ public class QuanLyQuanAnApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(QuanLyQuanAnApplication.class, args);
 		
-		
-//		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainer.class);
-//		KhachHang kh = (KhachHang) context.getBean(KhachHang.class);
-//		kh.setName("Quang");
-//		kh.setIdKH(1);
-//		
-//		MonAn ma1 = (MonAn) context.getBean(MonAn.class);
-//		ma1.setId(1);
-//		ma1.setName("Bun rieu");
-//		ma1.setPrice(15.2f);
-//		ma1.setQuantity(1);
-//		ma1.setState(true);
-//		
-//		
-//		ArrayList<MonAn> monAns = new ArrayList<MonAn>();
-//		monAns.add(ma1)  ;
-//		DonHang dh1 = (DonHang) context.getBean(DonHang.class);
-//		dh1.setMonAns(monAns);
-//		dh1.setIdDH(1);
-//		
-//		System.out.println(dh1.getMonAns().get(0).getName());
+
 	}
 
 }

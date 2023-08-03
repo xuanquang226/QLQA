@@ -1,6 +1,7 @@
 package controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,18 +10,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import config.IOCContainerMonAn;
 import dao.DAOMonAn;
 import model.MonAn;
 
 @RestController
-@ComponentScan(value = { "dao", "model" })
+@ComponentScan(value = {"dao"})
 public class RestMonAn {
 
 	@Autowired
 	private DAOMonAn DAOmonAn;
-
-	@Autowired
-	private MonAn monAn;
+	
 
 	@GetMapping(value = "/aa/{id}")
 	public String getNameMonAn(@PathVariable long id) {
@@ -30,16 +30,15 @@ public class RestMonAn {
 	@PostMapping(value = "/aa/")
 	public void postMonAn() {
 		// Temp data for test function
-		monAn.setName("Com tam");
-		monAn.setPrice(30.000F);
-		monAn.setQuantity(10);
-		monAn.setState(true);
-	
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainerMonAn.class);
+		MonAn monAn = (MonAn) context.getBean("monAn");
 		DAOmonAn.post(monAn);
 	}
 
 	@PutMapping(value = "/aa/{id}")
-	public void putMonAn(@PathVariable long id) {
+	public void putNameMonAn(@PathVariable long id) {
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainerMonAn.class);
+		MonAn monAn = (MonAn) context.getBean("nameMA");		
 		DAOmonAn.put(monAn, id);
 	}
 

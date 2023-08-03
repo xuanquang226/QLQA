@@ -37,19 +37,19 @@ public class DAOMonAn implements DAOCRUDInterface<MonAn> {
 		Transaction tr = ss.beginTransaction();
 		
 		// Get object on id
-		t = ss.get(MonAn.class, id);
+		MonAn t2 = ss.get(MonAn.class, id);
 		
 		// Transaction status
 		ss.evict(t);
 		
 		
 		// Temp data for test function
-		// Set new value for object
-		t.setName("Banh xeo");
-		t.setPrice(18.0f);
-		
+//		// Set new value for object
+//		t.setName("Banh xeo");
+//		t.setPrice(18.0f);
+		t2.setName(t.getName());
 		// Persist object
-		ss.merge(t);
+		ss.merge(t2);
 		
 		tr.commit();
 		ss.close();
