@@ -9,6 +9,6 @@ import model.MonAn;
 
 @Configuration
 @ComponentScan(value = "model")
-public class IOCContainer {
+public class IOCContainerMonAn {
 
 }

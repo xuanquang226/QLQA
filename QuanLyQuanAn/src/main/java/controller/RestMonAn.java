@@ -43,8 +43,8 @@ public class RestMonAn {
 		DAOmonAn.put(monAn, id);
 	}
 
-	@DeleteMapping(value = "/aa")
-	public void deleteMonAn() {
-		DAOmonAn.delete(0);
+	@DeleteMapping(value = "/aa/{id}")
+	public void deleteMonAn(@PathVariable long id) {
+		DAOmonAn.delete(id);
 	}
 }

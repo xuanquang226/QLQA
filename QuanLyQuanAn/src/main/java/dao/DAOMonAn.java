@@ -45,8 +45,8 @@ public class DAOMonAn implements DAOCRUDInterface<MonAn> {
 		
 		// Temp data for test function
 		// Set new value for object
-		t.setName("Bun rieu");
-		t.setPrice(16.0f);
+		t.setName("Banh xeo");
+		t.setPrice(18.0f);
 		
 		// Persist object
 		ss.merge(t);
@@ -58,8 +58,15 @@ public class DAOMonAn implements DAOCRUDInterface<MonAn> {
 
 	@Override
 	public void delete(long id) {
-		// TODO Auto-generated method stub
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
 		
+		MonAn ma = ss.get(MonAn.class, id);
+		ss.remove(ma);
+		
+		tr.commit();
+		ss.close();		
 	}
 
 	@Override
