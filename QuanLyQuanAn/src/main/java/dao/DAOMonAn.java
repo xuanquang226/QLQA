@@ -11,7 +11,7 @@ import model.MonAn;
 import util.HibernateUtil;
 
 
-@Repository
+@Component
 public class DAOMonAn implements DAOCRUDInterface<MonAn> {
 
 	@Override
@@ -31,25 +31,33 @@ public class DAOMonAn implements DAOCRUDInterface<MonAn> {
 	}
 
 	@Override
-	public void put(MonAn t, long id) {
+	public void put(MonAn ma1, long id) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss =  sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
 		// Get object on id
-		MonAn t2 = ss.get(MonAn.class, id);
+		MonAn ma2 = ss.get(MonAn.class, id);
 		
 		// Transaction status
-		ss.evict(t);
+		ss.evict(ma2);
 		
+		if(ma1.getName() != null) {
+			ma2.setName(ma1.getName());
+		}
+		if(ma1.getPrice() != 0) {
+			ma2.setPrice(ma1.getPrice());
+		}
 		
-		// Temp data for test function
-//		// Set new value for object
-//		t.setName("Banh xeo");
-//		t.setPrice(18.0f);
-		t2.setName(t.getName());
+		if(ma1.getQuantity() != 0) {
+			ma2.setQuantity(ma1.getQuantity());
+		}
+		
+		if(ma1.getState() != true) {
+			ma2.setState(ma1.getState());
+		}
 		// Persist object
-		ss.merge(t2);
+		ss.merge(ma2);
 		
 		tr.commit();
 		ss.close();
@@ -75,7 +83,13 @@ public class DAOMonAn implements DAOCRUDInterface<MonAn> {
 		Session ss =  sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
-		ss.save(t);
+		//Temp data
+//		t.setName("Dau hu don thit");
+//		t.setPrice(15.5f);
+//		t.setQuantity(10);
+//		t.setState(true);
+		
+		ss.persist(t);
 		
 		tr.commit();
 		ss.close();

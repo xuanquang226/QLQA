@@ -27,7 +27,8 @@ public class QuanLyQuanAnApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(QuanLyQuanAnApplication.class, args);
 		
-
+		
+		// activity get mon an
 	}
 
 }

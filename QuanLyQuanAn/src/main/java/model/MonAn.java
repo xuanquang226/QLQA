@@ -23,15 +23,11 @@ public class MonAn {
 	private String name;
 	private int quantity;
 	private Boolean state;
-	private float price;
+	private double price;
 	
 	public MonAn() {}
 	
-	public MonAn(String name) {
-		this.name = name;
-	}
-	
-	public MonAn(long id, String name, int quantity, Boolean state, float price) {
+	public MonAn(long id, String name, int quantity, Boolean state, double price) {
 		this.id = id;
 		this.name = name;
 		this.quantity = quantity;
@@ -78,8 +74,8 @@ public class MonAn {
 	}
 
 	
-	public void setPrice(float price) {
-		this.price = price;
+	public void setPrice(double d) {
+		this.price = d;
 	}
 	
 	

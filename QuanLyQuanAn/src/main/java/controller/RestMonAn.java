@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import config.IOCContainerMonAn;
@@ -20,25 +21,30 @@ public class RestMonAn {
 
 	@Autowired
 	private DAOMonAn DAOmonAn;
-	
+		
 
 	@GetMapping(value = "/aa/{id}")
 	public String getNameMonAn(@PathVariable long id) {
 		return DAOmonAn.get(id).getName();
 	}
+	
+//	@GetMapping(value = "/aa/{id}")
+//	public MonAn getMonAn(@PathVariable long id) {
+//		return DAOmonAn.get(id);
+//	}
 
 	@PostMapping(value = "/aa/")
-	public void postMonAn() {
-		// Temp data for test function
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainerMonAn.class);
-		MonAn monAn = (MonAn) context.getBean("monAn");
+	public void postMonAn(@RequestBody MonAn monAn) {
+		
+//		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainerMonAn.class);
+//		monAn = (MonAn) context.getBean("monAn");
 		DAOmonAn.post(monAn);
 	}
 
-	@PutMapping(value = "/aa/{id}")
-	public void putNameMonAn(@PathVariable long id) {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainerMonAn.class);
-		MonAn monAn = (MonAn) context.getBean("nameMA");		
+	@PutMapping(value = "/aa/{id}")	
+	public void putMonAn(@RequestBody MonAn monAn, @PathVariable long id) {
+//		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainerMonAn.class);
+//		monAn = (MonAn) context.getBean("monAn");
 		DAOmonAn.put(monAn, id);
 	}
 
@@ -46,4 +52,9 @@ public class RestMonAn {
 	public void deleteMonAn(@PathVariable long id) {
 		DAOmonAn.delete(id);
 	}
+	
+//	@GetMapping(value = "ab/{id}")
+//	public String nameMA() {
+//		
+//	} 
 }
