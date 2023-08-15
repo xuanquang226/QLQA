@@ -24,8 +24,8 @@ public class RestMonAn {
 		
 
 	@GetMapping(value = "/aa/{id}")
-	public String getNameMonAn(@PathVariable long id) {
-		return DAOmonAn.get(id).getName();
+	public MonAn getMonAn(@PathVariable long id) {
+		return DAOmonAn.get(id);
 	}
 	
 //	@GetMapping(value = "/aa/{id}")
