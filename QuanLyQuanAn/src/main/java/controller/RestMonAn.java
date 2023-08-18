@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import config.IOCContainerMonAn;
 import dao.DAOMonAn;
-import model.MonAn;
+import model.Dish;
 
 @RestController
 @ComponentScan(value = {"dao"})
@@ -24,7 +24,7 @@ public class RestMonAn {
 		
 
 	@GetMapping(value = "/aa/{id}")
-	public MonAn getMonAn(@PathVariable long id) {
+	public Dish getMonAn(@PathVariable long id) {
 		return DAOmonAn.get(id);
 	}
 	
@@ -34,7 +34,7 @@ public class RestMonAn {
 //	}
 
 	@PostMapping(value = "/aa/")
-	public void postMonAn(@RequestBody MonAn monAn) {
+	public void postMonAn(@RequestBody Dish monAn) {
 		
 //		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainerMonAn.class);
 //		monAn = (MonAn) context.getBean("monAn");
@@ -42,7 +42,7 @@ public class RestMonAn {
 	}
 
 	@PutMapping(value = "/aa/{id}")	
-	public void putMonAn(@RequestBody MonAn monAn, @PathVariable long id) {
+	public void putMonAn(@RequestBody Dish monAn, @PathVariable long id) {
 //		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainerMonAn.class);
 //		monAn = (MonAn) context.getBean("monAn");
 		DAOmonAn.put(monAn, id);

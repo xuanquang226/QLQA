@@ -14,10 +14,11 @@ import org.springframework.stereotype.Component;
 
 import config.IOCContainerMonAn;
 import controller.RestMonAn;
-import model.DonHang;
+import model.Order;
+import model.Account;
 import model.HoaDonThanhToan;
-import model.KhachHang;
-import model.MonAn;
+import model.Guest;
+import model.Dish;
 import util.HibernateUtil;
 
 
@@ -28,7 +29,6 @@ public class QuanLyQuanAnApplication {
 		SpringApplication.run(QuanLyQuanAnApplication.class, args);
 		
 		
-		// activity get mon an
 	}
 
 }

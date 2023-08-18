@@ -11,11 +11,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "MonAn")
+@Entity(name="Dish")
+@Table(name = "dish")
 @Component
 @Scope("prototype")
-public class MonAn {
+public class Dish {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,9 +25,9 @@ public class MonAn {
 	private Boolean state;
 	private double price;
 	
-	public MonAn() {}
+	public Dish() {}
 	
-	public MonAn(long id, String name, int quantity, Boolean state, double price) {
+	public Dish(long id, String name, int quantity, Boolean state, double price) {
 		this.id = id;
 		this.name = name;
 		this.quantity = quantity;

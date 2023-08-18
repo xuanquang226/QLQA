@@ -7,22 +7,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import model.MonAn;
+import model.Dish;
 import util.HibernateUtil;
 
 
 @Component
-public class DAOMonAn implements DAOCRUDInterface<MonAn> {
+public class DAOMonAn implements DAOCRUDInterface<Dish> {
 
 	@Override
-	public MonAn get(long id) {
+	public Dish get(long id) {
 		// Create session
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
 		// Get object on id
-		MonAn ma1 = ss.get(MonAn.class, id);
+		Dish ma1 = ss.get(Dish.class, id);
 		tr.commit();
 		
 		// Close session
@@ -31,13 +31,13 @@ public class DAOMonAn implements DAOCRUDInterface<MonAn> {
 	}
 
 	@Override
-	public void put(MonAn ma1, long id) {
+	public void put(Dish ma1, long id) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss =  sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
 		// Get object on id
-		MonAn ma2 = ss.get(MonAn.class, id);
+		Dish ma2 = ss.get(Dish.class, id);
 		
 		// Transaction status
 		ss.evict(ma2);
@@ -70,7 +70,7 @@ public class DAOMonAn implements DAOCRUDInterface<MonAn> {
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
-		MonAn ma = ss.get(MonAn.class, id);
+		Dish ma = ss.get(Dish.class, id);
 		ss.remove(ma);
 		
 		tr.commit();
@@ -78,7 +78,7 @@ public class DAOMonAn implements DAOCRUDInterface<MonAn> {
 	}
 
 	@Override
-	public void post(MonAn t) {
+	public void post(Dish t) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss =  sf.openSession();
 		Transaction tr = ss.beginTransaction();

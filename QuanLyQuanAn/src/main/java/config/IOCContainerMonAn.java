@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import controller.RestMonAn;
 import dao.DAOMonAn;
-import model.MonAn;
+import model.Dish;
 
 @Configuration
 @ComponentScan(value = {"model"})

@@ -2,6 +2,7 @@ package model;
 
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,26 +16,24 @@ public class Account {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idA;
+	private int idS;
 	private String username;
 	private String password;
-	private Boolean typeA;
-	
-	public Account() {}
-	
-	
-	
-	public Account(int idA, String username, String password, Boolean typeA) {
-		this.idA = idA;
+	private boolean typeA;		
+	public Account() {
+
+	}
+	public Account(int idS, String username, String password, boolean typeA) {
+		this.idS = idS;
 		this.username = username;
 		this.password = password;
 		this.typeA = typeA;
 	}
-	public int getIdA() {
-		return idA;
+	public int getIdS() {
+		return idS;
 	}
-	public void setIdA(int idA) {
-		this.idA = idA;
+	public void setIdS(int idS) {
+		this.idS = idS;
 	}
 	public String getUsername() {
 		return username;
@@ -48,10 +47,10 @@ public class Account {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Boolean getTypeA() {
+	public boolean isTypeA() {
 		return typeA;
 	}
-	public void setTypeA(Boolean typeA) {
+	public void setTypeA(boolean typeA) {
 		this.typeA = typeA;
 	}
 	

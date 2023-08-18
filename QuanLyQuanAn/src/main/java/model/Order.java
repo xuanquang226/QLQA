@@ -13,19 +13,19 @@ import jakarta.persistence.Id;
 
 @Entity
 @Component
-public class DonHang {
+public class Order {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long idDH;
-	private ArrayList<MonAn> monAns;
-	private KhachHang kh;
+	private ArrayList<Dish> monAns;
+	private Guest kh;
 	
 	
-	public DonHang() {
+	public Order() {
 		
 	}
 	
-	public DonHang(long iDH, ArrayList<MonAn> monAns, KhachHang kh) {
+	public Order(long iDH, ArrayList<Dish> monAns, Guest kh) {
 		this.idDH = idDH;
 		this.monAns = monAns;
 		this.kh = kh;
@@ -39,20 +39,20 @@ public class DonHang {
 		this.idDH = idDH;
 	}
 
-	public ArrayList<MonAn> getMonAns() {
+	public ArrayList<Dish> getMonAns() {
 		return monAns;
 	}
 
-	public void setMonAns(ArrayList<MonAn> monAns) {
+	public void setMonAns(ArrayList<Dish> monAns) {
 		this.monAns = monAns;
 	}
 
-	public KhachHang getKh() {
+	public Guest getKh() {
 		return kh;
 	}
 
 	@Autowired
-	public void setKh(KhachHang kh) {
+	public void setKh(Guest kh) {
 		this.kh = kh;
 	}
 	

@@ -6,25 +6,27 @@ import jakarta.persistence.Entity;
 
 @Entity
 @Component
-public class KhachHang {
-	private long idKH;
+public class Guest {
+	private int idKH;
 	private String name;
+	private String phone;
 //	private HoaDonThanhToan hdtt;
 	
-	public KhachHang() {
+	public Guest() {
 		
 	}
 	
-	public KhachHang(long id, String name) {
+	public Guest(int id, String name, String phone) {
 		this.idKH = id;
 		this.name = name;
+		this.phone = phone;
 	}
 
 	public long getIdKH() {
 		return idKH;
 	}
 
-	public void setIdKH(long idKH) {
+	public void setIdKH(int idKH) {
 		this.idKH = idKH;
 	}
 

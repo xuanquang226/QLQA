@@ -13,7 +13,7 @@
         
         
         
-        <mapping class="model.MonAn"/>
+        <mapping class="model.Dish"/>
         <mapping class="model.Account"/>
     </session-factory>
 </hibernate-configuration>
