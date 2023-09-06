@@ -15,5 +15,6 @@
         
         <mapping class="model.Dish"/>
         <mapping class="model.Account"/>
+        <mapping class="model.Table"/>
     </session-factory>
 </hibernate-configuration>

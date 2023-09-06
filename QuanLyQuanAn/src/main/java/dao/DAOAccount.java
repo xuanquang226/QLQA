@@ -22,7 +22,8 @@ public class DAOAccount {
 		String sql = "from Account as a where a.username = :username and a.password = :password ";
 
 		Account a = ss.createQuery(sql, Account.class).setParameter("username", username)
-				.setParameter("password", password).uniqueResult();
+													.setParameter("password", password)
+													.uniqueResult();
 
 		tr.commit();
 		ss.close();
