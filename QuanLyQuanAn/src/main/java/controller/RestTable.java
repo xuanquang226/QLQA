@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dao.DAOTable;
-import model.Table;
+import model.DinnerTable;
 
 @RestController
 @ComponentScan(value = {"dao"})
@@ -19,7 +19,7 @@ public class RestTable {
 	
 	
 	@GetMapping(value = "api/table")
-	public List<Table> getTable(){
+	public List<DinnerTable> getTable(){
 		return daoTable.getInfoTable();
 	}
 }

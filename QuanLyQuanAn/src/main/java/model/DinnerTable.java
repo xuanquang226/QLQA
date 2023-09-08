@@ -7,20 +7,20 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity(name = "Table")
-@jakarta.persistence.Table(name= "listtable")
+@Entity(name ="DinnerTable")
+@jakarta.persistence.Table(name= "dinnertable")
 @Component
-public class Table {
+public class DinnerTable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int oNumber;
 	private boolean stt;
 	
-	public Table() {
+	public DinnerTable() {
 
 	}
 
-	public Table(int oNumber, boolean stt) {
+	public DinnerTable(int oNumber, boolean stt) {
 		this.oNumber = oNumber;
 		this.stt = stt;
 	}

@@ -7,20 +7,20 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Component;
 
-import model.Table;
+import model.DinnerTable;
 import util.HibernateUtil;
 
 @Component
 public class DAOTable {
 	
-	public List<Table> getInfoTable() {
+	public List<DinnerTable> getInfoTable() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
-		String sql = "from Table";
+		String sql = "from DinnerTable";
 		
-		List<Table> lTable =  ss.createQuery(sql, Table.class).list();
+		List<DinnerTable> lTable =  ss.createQuery(sql, DinnerTable.class).list();
 		tr.commit();
 		ss.close();
 		
