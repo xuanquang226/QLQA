@@ -31,37 +31,47 @@ public class DAOMonAn implements DAOCRUDInterface<Dish> {
 	}
 
 	@Override
-	public void put(Dish ma1, long id) {
+	public String put(Dish ma1, long id) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss =  sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
-		// Get object on id
-		Dish ma2 = ss.get(Dish.class, id);
+//		// Get object on id
+//		Dish ma2 = ss.get(Dish.class, id);
+//		
+//		// Transaction status
+//		ss.evict(ma2);
+//		
+//		if(ma1.getName() != null) {
+//			ma2.setName(ma1.getName());
+//		}
+//		if(ma1.getPrice() != 0) {
+//			ma2.setPrice(ma1.getPrice());
+//		}
+//		
+//		if(ma1.getQuantity() != 0) {
+//			ma2.setQuantity(ma1.getQuantity());
+//		}
+//		
+//		if(ma1.getState() != true) {
+//			ma2.setState(ma1.getState());
+//		}
+//		// Persist object
+//		ss.merge(ma2);
 		
-		// Transaction status
-		ss.evict(ma2);
+		String sql = "update Dish set name = :newName, price = :newPrice, quantity = :newQuantity, state = :newState where id = :id ";
 		
-		if(ma1.getName() != null) {
-			ma2.setName(ma1.getName());
-		}
-		if(ma1.getPrice() != 0) {
-			ma2.setPrice(ma1.getPrice());
-		}
-		
-		if(ma1.getQuantity() != 0) {
-			ma2.setQuantity(ma1.getQuantity());
-		}
-		
-		if(ma1.getState() != true) {
-			ma2.setState(ma1.getState());
-		}
-		// Persist object
-		ss.merge(ma2);
+		int result = ss.createQuery(sql).setParameter("newName", ma1.getName())
+														.setParameter("newPrice", ma1.getPrice())
+														.setParameter("newQuantity", ma1.getQuantity())
+														.setParameter("newState", ma1.getState())
+														.setParameter("id", id)
+														.executeUpdate();
+													
 		
 		tr.commit();
 		ss.close();
-		
+		return "Thay doi "+ result +" mon";
 	}
 
 	@Override

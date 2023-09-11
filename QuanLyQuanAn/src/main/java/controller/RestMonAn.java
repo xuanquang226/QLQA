@@ -42,10 +42,10 @@ public class RestMonAn {
 	}
 
 	@PutMapping(value = "/aa/{id}")	
-	public void putMonAn(@RequestBody Dish monAn, @PathVariable long id) {
+	public String putMonAn(@RequestBody Dish monAn, @PathVariable long id) {
 //		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainerMonAn.class);
 //		monAn = (MonAn) context.getBean("monAn");
-		DAOmonAn.put(monAn, id);
+		return DAOmonAn.put(monAn, id);
 	}
 
 	@DeleteMapping(value = "/aa/{id}")
