@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -103,5 +105,18 @@ public class DAOMonAn implements DAOCRUDInterface<Dish> {
 		
 		tr.commit();
 		ss.close();
+	}
+	
+	public List<Dish> getListDish() {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		String sql = "From Dish";
+		List<Dish> lDish = ss.createQuery(sql, Dish.class).getResultList();
+		
+		tr.commit();
+		ss.close();
+		return lDish;
 	}
 }

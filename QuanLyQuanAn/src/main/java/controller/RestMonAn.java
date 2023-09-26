@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -33,7 +35,7 @@ public class RestMonAn {
 //		return DAOmonAn.get(id);
 //	}
 
-	@PostMapping(value = "/aa/")
+	@PostMapping(value = "/aa")
 	public void postMonAn(@RequestBody Dish monAn) {
 		
 //		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainerMonAn.class);
@@ -53,8 +55,8 @@ public class RestMonAn {
 		DAOmonAn.delete(id);
 	}
 	
-//	@GetMapping(value = "ab/{id}")
-//	public String nameMA() {
-//		
-//	} 
+	@GetMapping(value = "/aa")
+	public List<Dish> getListDish(){
+		return DAOmonAn.getListDish();
+	}
 }

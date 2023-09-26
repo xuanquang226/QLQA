@@ -18,7 +18,7 @@ public class RestTable {
 	private DAOTable daoTable;
 	
 	
-	@GetMapping(value = "api/table")
+	@GetMapping(value = "/api/table")
 	public List<DinnerTable> getTable(){
 		return daoTable.getInfoTable();
 	}
