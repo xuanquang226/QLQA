@@ -112,11 +112,27 @@ public class DAOMonAn implements DAOCRUDInterface<Dish> {
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
-		String sql = "From Dish";
-		List<Dish> lDish = ss.createQuery(sql, Dish.class).getResultList();
+		String sql = "From Dish order by name asc";
+		List<Dish> lDish = ss.createQuery(sql, Dish.class).list();
 		
 		tr.commit();
 		ss.close();
 		return lDish;
+	}
+	
+	public String putNameAQuantity(long id, Dish dish ) {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		String sql = "update Dish set name = :newName, quantity = :newQuantity, price =: newPrice where id = :id";
+		int result = ss.createQuery(sql).setParameter("newName", dish.getName())
+										.setParameter("newQuantity", dish.getQuantity())
+										.setParameter("id", dish.getId())
+										.setParameter("newPrice", dish.getPrice()).executeUpdate();
+		
+		tr.commit();
+		ss.close();
+		return "Thay doi";
 	}
 }

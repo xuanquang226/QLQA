@@ -25,7 +25,7 @@ public class RestMonAn {
 	private DAOMonAn DAOmonAn;
 		
 
-	@GetMapping(value = "/aa/{id}")
+	@GetMapping(value = "/dish/{id}")
 	public Dish getMonAn(@PathVariable long id) {
 		return DAOmonAn.get(id);
 	}
@@ -35,7 +35,7 @@ public class RestMonAn {
 //		return DAOmonAn.get(id);
 //	}
 
-	@PostMapping(value = "/aa")
+	@PostMapping(value = "/dish")
 	public void postMonAn(@RequestBody Dish monAn) {
 		
 //		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainerMonAn.class);
@@ -43,20 +43,25 @@ public class RestMonAn {
 		DAOmonAn.post(monAn);
 	}
 
-	@PutMapping(value = "/aa/{id}")	
-	public String putMonAn(@RequestBody Dish monAn, @PathVariable long id) {
-//		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainerMonAn.class);
-//		monAn = (MonAn) context.getBean("monAn");
-		return DAOmonAn.put(monAn, id);
-	}
+//	@PutMapping(value = "/dish/{id}")	
+//	public String putMonAn(@RequestBody Dish monAn, @PathVariable long id) {
+////		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(IOCContainerMonAn.class);
+////		monAn = (MonAn) context.getBean("monAn");
+//		return DAOmonAn.put(monAn, id);
+//	}
 
-	@DeleteMapping(value = "/aa/{id}")
+	@DeleteMapping(value = "/dish/{id}")
 	public void deleteMonAn(@PathVariable long id) {
 		DAOmonAn.delete(id);
 	}
 	
-	@GetMapping(value = "/aa")
+	@GetMapping(value = "/dish")
 	public List<Dish> getListDish(){
 		return DAOmonAn.getListDish();
+	}
+	
+	@PutMapping(value = "/dish/{id}")
+	public String putNameAQuantityDish(@PathVariable long id,@RequestBody Dish dish) {		
+		return DAOmonAn.putNameAQuantity(id, dish);
 	}
 }
