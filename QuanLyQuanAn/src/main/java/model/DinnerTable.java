@@ -1,11 +1,16 @@
 package model;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity(name ="DinnerTable")
 @jakarta.persistence.Table(name= "dinnertable")
@@ -15,6 +20,9 @@ public class DinnerTable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int oNumber;
 	private boolean stt;
+	
+	@OneToMany(mappedBy = "dinnerTable")
+	private Set<Order> order;
 	
 	public DinnerTable() {
 
@@ -41,4 +49,7 @@ public class DinnerTable {
 		this.stt = stt;
 	}
 	
+	public Set<Order> getOrder() {
+		return order;
+	}
 }

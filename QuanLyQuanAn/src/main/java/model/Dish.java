@@ -1,5 +1,8 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.hibernate.id.factory.spi.GenerationTypeStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -9,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity(name="Dish")
@@ -24,6 +28,9 @@ public class Dish {
 	private int quantity;
 	private Boolean state;
 	private double price;
+	
+	@ManyToMany(mappedBy = "listMonAn")
+	private Set<Order> listOrder = new HashSet<Order>();
 	
 	public Dish() {}
 	
@@ -78,5 +85,7 @@ public class Dish {
 		this.price = d;
 	}
 	
-	
+	public void setIdOrder(Order o) {
+		listOrder.add(o);
+	}
 }
