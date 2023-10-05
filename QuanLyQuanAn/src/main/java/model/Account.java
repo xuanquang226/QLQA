@@ -16,23 +16,24 @@ public class Account {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idS;
+	@Column(name="id_account")
+	private long idS;
 	private String username;
 	private String password;
 	private boolean typeA;		
 	public Account() {
 
 	}
-	public Account(int idS, String username, String password, boolean typeA) {
+	public Account(long idS, String username, String password, boolean typeA) {
 		this.idS = idS;
 		this.username = username;
 		this.password = password;
 		this.typeA = typeA;
 	}
-	public int getIdS() {
+	public long getIdS() {
 		return idS;
 	}
-	public void setIdS(int idS) {
+	public void setIdS(long idS) {
 		this.idS = idS;
 	}
 	public String getUsername() {

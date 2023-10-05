@@ -6,6 +6,12 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,22 +21,25 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+
 
 @Entity
 @Component
-@Table(name="orderD")
+@Table(name="orderr")
+
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idOrder;
+	private long id;
 	
-	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "order_dish", joinColumns = {@JoinColumn(name="id_order")}, inverseJoinColumns = {@JoinColumn(name="id_dish")})
+	@JsonIgnore
+	@ManyToMany(mappedBy = "listOrder")
 	private Set<Dish> listMonAn = new HashSet<Dish>();
 	
-	@ManyToOne
+	@JsonBackReference
+	@OneToOne
 	@JoinColumn(name="dinner_table")
 	private DinnerTable dinnerTable;
 	
@@ -46,9 +55,8 @@ public class Order {
 		
 	}
 
-	public Order(long idOrder, Set<Dish> listMonAn, DinnerTable dinnerTable, Staff staff, Date date, boolean state) {
-		this.idOrder = idOrder;
-		this.listMonAn = listMonAn;
+	public Order(long id, DinnerTable dinnerTable, Staff staff, Date date, boolean state) {
+		this.id = id;
 		this.dinnerTable = dinnerTable;
 		this.staff = staff;
 		this.date = date;
@@ -65,12 +73,12 @@ public class Order {
 	}
 
 	public long getId() {
-		return idOrder;
+		return id;
 	}
 
 
 	public void setId(int idOrder) {
-		this.idOrder = idOrder;
+		this.id = idOrder;
 	}
 
 

@@ -8,10 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
@@ -19,6 +28,7 @@ import jakarta.persistence.Table;
 @Table(name = "dish")
 @Component
 @Scope("prototype")
+
 public class Dish {
 	
 	@Id
@@ -29,7 +39,9 @@ public class Dish {
 	private Boolean state;
 	private double price;
 	
-	@ManyToMany(mappedBy = "listMonAn")
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "dish_order", joinColumns = {@JoinColumn(name="id_dish")}, inverseJoinColumns = {@JoinColumn(name="id_order")})
 	private Set<Order> listOrder = new HashSet<Order>();
 	
 	public Dish() {}

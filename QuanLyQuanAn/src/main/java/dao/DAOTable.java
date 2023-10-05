@@ -26,4 +26,5 @@ public class DAOTable {
 		
 		return lTable;
 	}
+	
 }

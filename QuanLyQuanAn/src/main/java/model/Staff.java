@@ -4,17 +4,24 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
+
 @Entity
 @Component
+
 public class Staff {
 	
 	@Id
@@ -33,11 +40,16 @@ public class Staff {
 	@Column(name = "position")
 	private String position;
 	
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
 	private List<Order> order;
 	
 	@OneToOne
+	@JoinColumn(name = "id_account")
 	private Account account;
+	
+	public Staff() {}
 
 	public Staff(long idStaff, String nameStaff, float workingHours, float oHourSalary, String position, Account account) {
 		this.idStaff = idStaff;
