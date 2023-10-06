@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -18,14 +20,8 @@ public class DAOStaff implements DAOCRUDInterface<Staff> {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
-		Account a = ss.get(Account.class, idAccount);
-		long id = a.getIdS();
-		
-		
-		String sql = "from Staff where :account = :idAccount";
-		Staff s1 = ss.createQuery(sql, Staff.class).setParameter("account", id)
-													.setParameter("idAccount", idAccount).uniqueResult();
-		
+		String sql = "from Staff as s where s.account.idS = : idAccount";
+		Staff s1 = ss.createQuery(sql, Staff.class).setParameter("idAccount", idAccount).uniqueResult();
 		tr.commit();
 		ss.close();
 		return s1;

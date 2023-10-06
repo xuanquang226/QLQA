@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,18 +29,18 @@ import jakarta.persistence.Table;
 @Entity
 @Component
 @Table(name="orderr")
-
+@JsonIdentityInfo(generator=ObjectIdGenerators.None.class, property="id")
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@JsonIgnore
-	@ManyToMany(mappedBy = "listOrder")
-	private Set<Dish> listMonAn = new HashSet<Dish>();
 	
-	@JsonBackReference
-	@OneToOne
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="order_dish", joinColumns = {@JoinColumn(name = "id_order")}, inverseJoinColumns = {@JoinColumn(name = "id_dish_order")})
+	private Set<DishOrder> listMonAn = new HashSet<DishOrder>();
+	
+	@ManyToOne
 	@JoinColumn(name="dinner_table")
 	private DinnerTable dinnerTable;
 	
@@ -51,16 +52,19 @@ public class Order {
 	
 	private boolean state;
 	
+	private String note;
+	
 	public Order() {
 		
 	}
 
-	public Order(long id, DinnerTable dinnerTable, Staff staff, Date date, boolean state) {
+	public Order(long id, DinnerTable dinnerTable, Staff staff, Date date, boolean state, String note) {
 		this.id = id;
 		this.dinnerTable = dinnerTable;
 		this.staff = staff;
 		this.date = date;
 		this.state = state;
+		this.note = note;
 	}
 
 
@@ -82,12 +86,12 @@ public class Order {
 	}
 
 
-	public Set<Dish> getListMonAn() {
+	public Set<DishOrder> getListMonAn() {
 		return listMonAn;
 	}
 
 
-	public void setListMonAn(Set<Dish> listMonAn) {
+	public void setListMonAn(Set<DishOrder> listMonAn) {
 		this.listMonAn = listMonAn;
 	}
 
@@ -121,7 +125,17 @@ public class Order {
 	}
 
 
-	public void setMonAn(Dish dish) {
-		this.listMonAn.add(dish);
+	public void setMonAn(DishOrder dishOrder) {
+		this.listMonAn.add(dishOrder);
 	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+	
+	
 }

@@ -3,34 +3,26 @@ package model;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.hibernate.id.factory.spi.GenerationTypeStrategy;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
-@Entity(name="Dish")
-@Table(name = "dish")
+@Entity(name = "DishOrder")
+@Table(name = "dishOrder")
 @Component
 @Scope("prototype")
-@JsonIdentityInfo(generator=ObjectIdGenerators.None.class, property="id")
-public class Dish {
-	
+@JsonIdentityInfo(generator = ObjectIdGenerators.None.class, property = "id")
+public class DishOrder {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -38,12 +30,14 @@ public class Dish {
 	private int quantity;
 	private Boolean state;
 	private double price;
-	
-	
-	
-	public Dish() {}
-	
-	public Dish(long id, String name, int quantity, Boolean state, double price) {
+
+	@ManyToMany(mappedBy = "listMonAn")
+	private Set<Order> listOrder = new HashSet<Order>();
+
+	public DishOrder() {
+	}
+
+	public DishOrder(long id, String name, int quantity, Boolean state, double price) {
 		this.id = id;
 		this.name = name;
 		this.quantity = quantity;
@@ -71,7 +65,6 @@ public class Dish {
 		return quantity;
 	}
 
-	
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
@@ -80,12 +73,19 @@ public class Dish {
 		return state;
 	}
 
-
 	public void setState(Boolean state) {
 		this.state = state;
 	}
 
 	public double getPrice() {
 		return price;
+	}
+
+	public void setPrice(double d) {
+		this.price = d;
+	}
+
+	public void setIdOrder(Order o) {
+		listOrder.add(o);
 	}
 }

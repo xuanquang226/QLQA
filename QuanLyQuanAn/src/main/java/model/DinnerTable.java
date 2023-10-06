@@ -29,19 +29,18 @@ public class DinnerTable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	//private boolean stt;
+	private boolean stt;
 	
-	@JsonManagedReference
-	@OneToOne
-	@JoinColumn(name = "orderr")
-	private Order order;
+	@JsonIgnore
+	@OneToMany(mappedBy = "dinnerTable")
+	private List<Order> order;
 	
 	
 	public DinnerTable() {}
 	
-	public DinnerTable(long id, Order order) {
+	public DinnerTable(long id, boolean stt) {
 		this.id = id;
-		this.order = order;
+		this.stt = stt;
 	}
 
 	public long getID() {
@@ -52,12 +51,12 @@ public class DinnerTable {
 		this.id = id;
 	}
 
-	public Order getOrder() {
-		return order;
+	public boolean isStt() {
+		return stt;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setStt(boolean stt) {
+		this.stt = stt;
 	}
 	
 	
