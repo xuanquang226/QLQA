@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,6 +35,9 @@ public class DinnerTable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "dinnerTable")
 	private List<Order> order;
+	
+	@Column(name = "id_order")
+	private long idOrder;
 	
 	
 	public DinnerTable() {}
@@ -59,6 +63,12 @@ public class DinnerTable {
 		this.stt = stt;
 	}
 	
+	public void setIdOrder(long idOrder) {
+		this.idOrder = idOrder;
+	}
 	
+	public long getIdOrder() {
+		return idOrder;
+	}
 	
 }

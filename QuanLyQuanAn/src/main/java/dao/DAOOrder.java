@@ -1,6 +1,11 @@
 package dao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.swing.text.DateFormatter;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,8 +21,15 @@ public class DAOOrder implements DAOCRUDInterface<Order> {
 
 	@Override
 	public Order get(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		Order order = ss.get(Order.class, id);
+		
+		tr.commit();
+		ss.close();
+		return order;
 	}
 
 	@Override
@@ -37,18 +49,20 @@ public class DAOOrder implements DAOCRUDInterface<Order> {
 		
 	}
 	
-	public void createOrder(Order order, long idStaff, long idDinnerTable) {
+	public long createOrder(Order order, long idStaff, long idDinnerTable) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
-	
-		
+
 		ss.save(order);
-		String sql = "update Order as o set o.dinnerTable.id = :idDinnerTable, o.staff.idStaff = :idStaff where o.id= :idOrder";
+		
+		String sql = "update Order as o set o.dinnerTable.id = :idDinnerTable, o.staff.idStaff = :idStaff where o.id= :idOrder";		
 		int result = ss.createQuery(sql).setParameter("idDinnerTable", idDinnerTable).setParameter("idStaff", idStaff).setParameter("idOrder", order.getId()).executeUpdate();
 		
+		long idOrder = order.getId();
 		tr.commit();
 		ss.close();
+		return idOrder;
 	}
 //	
 	

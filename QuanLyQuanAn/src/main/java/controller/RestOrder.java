@@ -20,9 +20,15 @@ public class RestOrder {
 	@Autowired
 	private DAOOrder daoOrder;
 	
-	@PostMapping("/api/order")
-	public void createOrder(@RequestBody Order order, @RequestParam long idStaff, @RequestParam long idTable) {
-		daoOrder.createOrder(order, idStaff, idTable);
+	@PostMapping(value = "/api/order")
+	public long createOrder(@RequestBody Order order, @RequestParam long idStaff, @RequestParam long idTable) {
+		return daoOrder.createOrder(order, idStaff, idTable);
+	
+	}
+	
+	@GetMapping(value = "/api/order/{id}")
+	public Order getOrderById(@PathVariable long id) {
+		return daoOrder.get(id);
 	}
 
 }

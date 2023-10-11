@@ -1,20 +1,28 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,49 +39,55 @@ import jakarta.persistence.Table;
 @Table(name="orderr")
 @JsonIdentityInfo(generator=ObjectIdGenerators.None.class, property="id")
 public class Order {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)	
 	@JoinTable(name="order_dish", joinColumns = {@JoinColumn(name = "id_order")}, inverseJoinColumns = {@JoinColumn(name = "id_dish_order")})
 	private Set<DishOrder> listMonAn = new HashSet<DishOrder>();
 	
+
 	@ManyToOne
 	@JoinColumn(name="dinner_table")
 	private DinnerTable dinnerTable;
 	
+
 	@ManyToOne
 	@JoinColumn(name="staff")
 	private Staff staff;
 	
-	private Date date;
+	@Column(name = "date_create")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = Shape.STRING)
+	private String dateCreate;
 	
+
 	private boolean state;
 	
-	private String note;
+	@Column(name= "total_price")
+	private double totalPrice;
 	
 	public Order() {
 		
 	}
 
-	public Order(long id, DinnerTable dinnerTable, Staff staff, Date date, boolean state, String note) {
+	public Order(long id, DinnerTable dinnerTable, Staff staff, String date_create, boolean state) {
 		this.id = id;
 		this.dinnerTable = dinnerTable;
 		this.staff = staff;
-		this.date = date;
+		this.dateCreate = date_create;
 		this.state = state;
-		this.note = note;
 	}
 
 
-	public Date getDate() {
-		return date;
+	public String getDate() {
+		return dateCreate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(String date_create) {
+		this.dateCreate = date_create;
 	}
 
 	public long getId() {
@@ -129,13 +143,11 @@ public class Order {
 		this.listMonAn.add(dishOrder);
 	}
 
-	public String getNote() {
-		return note;
+	public void setTotalPrice(double totalPrice){
+	    this.totalPrice = totalPrice;
 	}
 
-	public void setNote(String note) {
-		this.note = note;
+	public double getTotalPrice(){
+	    return totalPrice;
 	}
-	
-	
 }

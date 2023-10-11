@@ -61,12 +61,11 @@ public class DAOMonAn implements DAOCRUDInterface<Dish> {
 //		// Persist object
 //		ss.merge(ma2);
 		
-		String sql = "update Dish set name = :newName, price = :newPrice, quantity = :newQuantity, state = :newState where id = :id ";
+		String sql = "update Dish set name = :newName, price = :newPrice, quantity = :newQuantity where id = :id ";
 		
 		int result = ss.createQuery(sql).setParameter("newName", ma1.getName())
 														.setParameter("newPrice", ma1.getPrice())
 														.setParameter("newQuantity", ma1.getQuantity())
-														.setParameter("newState", ma1.getState())
 														.setParameter("id", id)
 														.executeUpdate();
 													

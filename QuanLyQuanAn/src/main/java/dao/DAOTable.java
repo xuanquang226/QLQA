@@ -27,4 +27,26 @@ public class DAOTable {
 		return lTable;
 	}
 	
+	public void updateIdOrderForTable(long idTable, long idOrder) {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		String sql = "update DinnerTable set idOrder = :idOrder where id = :idTable";
+		int result = ss.createQuery(sql).setParameter("idOrder", idOrder).setParameter("idTable", idTable).executeUpdate();
+		tr.commit();
+		ss.close();
+	}
+	
+	public DinnerTable getTable(long idTable) {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		DinnerTable dinnerTable = ss.get(DinnerTable.class, idTable);
+		tr.commit();
+		ss.close();
+		
+		return dinnerTable;
+	}
 }
