@@ -34,8 +34,14 @@ public class DAOOrder implements DAOCRUDInterface<Order> {
 
 	@Override
 	public String put(Order t, long id) {
-		// TODO Auto-generated method stub
-		return null;
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		ss.update(t);
+		tr.commit();
+		ss.close();
+		return "Thanh toan thanh cong";
 	}
 
 	@Override
@@ -54,7 +60,7 @@ public class DAOOrder implements DAOCRUDInterface<Order> {
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 
-		ss.save(order);
+		ss.saveOrUpdate(order);
 		
 		String sql = "update Order as o set o.dinnerTable.id = :idDinnerTable, o.staff.idStaff = :idStaff where o.id= :idOrder";		
 		int result = ss.createQuery(sql).setParameter("idDinnerTable", idDinnerTable).setParameter("idStaff", idStaff).setParameter("idOrder", order.getId()).executeUpdate();

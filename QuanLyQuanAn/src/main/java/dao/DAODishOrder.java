@@ -28,13 +28,13 @@ public class DAODishOrder {
 		return lDishOrder;
 	}
 	
-	public List<DishOrder> getListDishOrderWithIdOrder(long idOrder, long idTable){
+	public List<DishOrder> getListDishOrderWithIdOrder(long idOrder){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
-		String sql = "from DishOrder as dishorder where dishorder.id in (select listMA.id from Order as orderr inner join orderr.listMonAn as listMA where orderr.id = :idOrder and orderr.dinnerTable.id = :idTable)";
-		List<DishOrder> lDishOrder = ss.createQuery(sql, DishOrder.class).setParameter("idTable", idTable).setParameter("idOrder", idOrder).list();
+		String sql = "from DishOrder as dishorder where dishorder.id in (select listMA.id from Order as orderr inner join orderr.listMonAn as listMA where orderr.id = :idOrder)";
+		List<DishOrder> lDishOrder = ss.createQuery(sql, DishOrder.class).setParameter("idOrder", idOrder).list();
 		
 		tr.commit();
 		ss.close();

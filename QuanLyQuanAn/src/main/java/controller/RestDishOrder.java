@@ -23,8 +23,8 @@ public class RestDishOrder {
 	}
 	
 	@GetMapping("/api/dishorder/{idOrder}")
-	public List<DishOrder> getListDishOrderWithIdOrder(@PathVariable long idOrder, @RequestParam long idTable){
-		return daoDishOrder.getListDishOrderWithIdOrder(idOrder, idTable);
+	public List<DishOrder> getListDishOrderWithIdOrder(@PathVariable long idOrder){
+		return daoDishOrder.getListDishOrderWithIdOrder(idOrder);
 	}
 	
 }
