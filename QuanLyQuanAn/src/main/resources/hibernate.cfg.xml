@@ -19,5 +19,8 @@
         <mapping class="model.Order"/>
         <mapping class="model.Staff"/>
         <mapping class="model.DishOrder"/>
+        <mapping class="model.Payroll"/>
+        <mapping class="model.PayrollStaff"/>
+        <mapping class="model.TimeSheets"/>
     </session-factory>
 </hibernate-configuration>

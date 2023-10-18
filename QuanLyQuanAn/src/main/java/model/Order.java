@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
@@ -32,6 +33,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 
 @Entity
@@ -60,8 +63,8 @@ public class Order {
 	private Staff staff;
 	
 	@Column(name = "date_create")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = Shape.STRING)
-	private String dateCreate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
+	private Timestamp dateCreate;
 	
 
 	private boolean state;
@@ -73,7 +76,7 @@ public class Order {
 		
 	}
 
-	public Order(long id, DinnerTable dinnerTable, Staff staff, String date_create, boolean state) {
+	public Order(long id, DinnerTable dinnerTable, Staff staff, Timestamp date_create, boolean state) {
 		this.id = id;
 		this.dinnerTable = dinnerTable;
 		this.staff = staff;
@@ -82,11 +85,11 @@ public class Order {
 	}
 
 
-	public String getDate() {
+	public Timestamp getDate() {
 		return dateCreate;
 	}
 
-	public void setDate(String date_create) {
+	public void setDate(Timestamp date_create) {
 		this.dateCreate = date_create;
 	}
 

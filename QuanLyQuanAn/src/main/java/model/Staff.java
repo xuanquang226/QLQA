@@ -1,6 +1,8 @@
 package model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
@@ -11,17 +13,19 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 
 @Entity
 @Component
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.None.class, property = "idStaff")
 public class Staff {
 	
 	@Id
@@ -48,6 +52,12 @@ public class Staff {
 	@OneToOne
 	@JoinColumn(name = "id_account")
 	private Account account;
+	
+	@OneToMany(mappedBy = "staff")
+	private Set<PayrollStaff> setPayrollStaff = new HashSet<PayrollStaff>();
+	
+	@ManyToMany(mappedBy = "setStaff", fetch = FetchType.EAGER)
+	private Set<TimeSheets> setTimeSheets = new HashSet<TimeSheets>();
 	
 	public Staff() {}
 
@@ -111,5 +121,23 @@ public class Staff {
 	public List<Order> getOrder() {
 		return order;
 	}
+
+//	public Set<Payroll> getSetPayroll() {
+//		return setPayroll;
+//	}
+//
+//	public void setSetPayroll(Set<Payroll> setPayroll) {
+//		this.setPayroll = setPayroll;
+//	}
+
+	public Set<TimeSheets> getSetTimeSheets() {
+		return setTimeSheets;
+	}
+
+	public void setSetTimeSheets(Set<TimeSheets> setTimeSheets) {
+		this.setTimeSheets = setTimeSheets;
+	}
+	
+	
 	
 }
