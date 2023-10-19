@@ -21,9 +21,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 
 @Entity
+@Table(name = "staff")
 @Component
 @JsonIdentityInfo(generator = ObjectIdGenerators.None.class, property = "idStaff")
 public class Staff {

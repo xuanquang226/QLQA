@@ -21,8 +21,8 @@ public class RestAccount {
 	
 	
 	@PostMapping(value = "/api/login")
-	public Account getUser(@RequestBody Account a) {
-		return da.login(a.getUsername(), a.getPassword());
+	public Account getUser(@RequestBody Account a){
+		return da.login(a.getUsername(), a.getPassword());		
 	} 
 	
 	

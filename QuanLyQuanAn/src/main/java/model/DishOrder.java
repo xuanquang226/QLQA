@@ -17,7 +17,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity(name = "DishOrder")
-@Table(name = "dishOrder")
+@Table(name = "dishorder")
 @Component
 @Scope("prototype")
 @JsonIdentityInfo(generator = ObjectIdGenerators.None.class, property = "id")
