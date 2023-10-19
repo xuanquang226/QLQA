@@ -22,5 +22,6 @@
         <mapping class="model.Payroll"/>
         <mapping class="model.PayrollStaff"/>
         <mapping class="model.TimeSheets"/>
+        <mapping class="model.TimeSheetsStaff"/>
     </session-factory>
 </hibernate-configuration>

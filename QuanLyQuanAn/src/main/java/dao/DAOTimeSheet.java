@@ -27,7 +27,12 @@ public class DAOTimeSheet implements DAOCRUDInterface<TimeSheets> {
 
 	@Override
 	public String put(TimeSheets t, long id) {
-		// TODO Auto-generated method stub
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		
+		
 		return null;
 	}
 
@@ -39,8 +44,14 @@ public class DAOTimeSheet implements DAOCRUDInterface<TimeSheets> {
 
 	@Override
 	public void post(TimeSheets t) {
-		// TODO Auto-generated method stub
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+
+		ss.save(t);
 		
+		tr.commit();
+		ss.close();
 	}
 
 	

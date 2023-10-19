@@ -23,6 +23,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -42,9 +43,8 @@ public class TimeSheets {
 	private Timestamp dateTimeKeeping;
 	
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "timesheet_staff", joinColumns = {@JoinColumn(name = "id_timesheet")}, inverseJoinColumns = {@JoinColumn(name = "id_staff")})
-	private Set<Staff> setStaff = new HashSet<Staff>();
+	@OneToMany(mappedBy = "timeSheets", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<TimeSheetsStaff> setTimeSheetsStaff = new HashSet<TimeSheetsStaff>();
 	
 	public TimeSheets() {}
 
@@ -68,5 +68,15 @@ public class TimeSheets {
 	public void setDateTimeKeeping(Timestamp dateTimeKeeping) {
 		this.dateTimeKeeping = dateTimeKeeping;
 	}
+
+	public Set<TimeSheetsStaff> getSetTimeSheetsStaff() {
+		return setTimeSheetsStaff;
+	}
+
+	public void setSetTimeSheetsStaff(Set<TimeSheetsStaff> setTimeSheetsStaff) {
+		this.setTimeSheetsStaff = setTimeSheetsStaff;
+	}
+	
+	
 
 }

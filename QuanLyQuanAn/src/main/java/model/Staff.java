@@ -53,11 +53,11 @@ public class Staff {
 	@JoinColumn(name = "id_account")
 	private Account account;
 	
-	@OneToMany(mappedBy = "staff")
+	@OneToMany(mappedBy = "staff", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<PayrollStaff> setPayrollStaff = new HashSet<PayrollStaff>();
 	
-	@ManyToMany(mappedBy = "setStaff", fetch = FetchType.EAGER)
-	private Set<TimeSheets> setTimeSheets = new HashSet<TimeSheets>();
+	@OneToMany(mappedBy = "stafff", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<TimeSheetsStaff> setTimeSheets = new HashSet<TimeSheetsStaff>();
 	
 	public Staff() {}
 
@@ -110,6 +110,14 @@ public class Staff {
 		this.position = position;
 	}
 
+	public List<Order> getOrder() {
+		return order;
+	}
+
+	public void setOrder(List<Order> order) {
+		this.order = order;
+	}
+
 	public Account getAccount() {
 		return account;
 	}
@@ -118,26 +126,20 @@ public class Staff {
 		this.account = account;
 	}
 
-	public List<Order> getOrder() {
-		return order;
+	public Set<PayrollStaff> getSetPayrollStaff() {
+		return setPayrollStaff;
 	}
 
-//	public Set<Payroll> getSetPayroll() {
-//		return setPayroll;
-//	}
-//
-//	public void setSetPayroll(Set<Payroll> setPayroll) {
-//		this.setPayroll = setPayroll;
-//	}
+	public void setSetPayrollStaff(Set<PayrollStaff> setPayrollStaff) {
+		this.setPayrollStaff = setPayrollStaff;
+	}
 
-	public Set<TimeSheets> getSetTimeSheets() {
+	public Set<TimeSheetsStaff> getSetTimeSheets() {
 		return setTimeSheets;
 	}
 
-	public void setSetTimeSheets(Set<TimeSheets> setTimeSheets) {
+	public void setSetTimeSheets(Set<TimeSheetsStaff> setTimeSheets) {
 		this.setTimeSheets = setTimeSheets;
 	}
-	
-	
-	
+
 }
