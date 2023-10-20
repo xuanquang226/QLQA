@@ -8,7 +8,7 @@
         <property name="hibernate.connection.url">jdbc:mysql://root:xKIQ3mtpT9zOOoMOxh3M@containers-us-west-205.railway.app:7453/railway</property>
 
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">xKIQ3mtpT9zOOoMOxh3M</property>
+        <property name ="hibernate.connection.password">xKIQ3mtpT9zOOoMOxh3M</property>
         <property name="hibernate.connection.host"></property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
