@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
@@ -59,7 +60,7 @@ public class Staff {
 	@OneToMany(mappedBy = "staff", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<PayrollStaff> setPayrollStaff = new HashSet<PayrollStaff>();
 	
-	@JsonBackReference
+	@JsonManagedReference
 	@OneToMany(mappedBy = "stafff", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<TimeSheetsStaff> setTimeSheets = new HashSet<TimeSheetsStaff>();
 	
