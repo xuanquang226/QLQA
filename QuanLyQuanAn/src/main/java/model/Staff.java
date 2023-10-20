@@ -60,7 +60,6 @@ public class Staff {
 	@OneToMany(mappedBy = "staff", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<PayrollStaff> setPayrollStaff = new HashSet<PayrollStaff>();
 	
-	@JsonManagedReference
 	@OneToMany(mappedBy = "stafff", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<TimeSheetsStaff> setTimeSheets = new HashSet<TimeSheetsStaff>();
 	

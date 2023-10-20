@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -30,11 +31,11 @@ public class TimeSheetsStaff {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@JsonBackReference
+	@JsonIdentityReference
 	@ManyToOne
 	private TimeSheets timeSheets;
 	
-	@JsonBackReference
+	@JsonIdentityReference
 	@ManyToOne
 	private Staff stafff;
 	
