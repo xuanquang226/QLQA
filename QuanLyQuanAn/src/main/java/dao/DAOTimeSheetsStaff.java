@@ -42,16 +42,7 @@ public class DAOTimeSheetsStaff implements DAOCRUDInterface<TimeSheetsStaff> {
 
 	@Override
 	public void post(TimeSheetsStaff t) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session ss = sf.openSession();
-		Transaction tr = ss.beginTransaction();
 		
-		ss.save(t);
-		String sql = "update TimeSheetsStaff as tss set tss.stafff.idStaff = :idStaff where tss.id = :id";
-		int result = ss.createQuery(sql).setParameter("idStaff", t.getStaff().getIdStaff())
-										.setParameter("id", t.getId()).executeUpdate();
-		tr.commit();
-		ss.close();
 	}
 
 	public List<TimeSheetsStaff> getList(){
@@ -98,12 +89,16 @@ public class DAOTimeSheetsStaff implements DAOCRUDInterface<TimeSheetsStaff> {
 		return lCount;
 	}
 	
-	public void postTimeSheetsStaff(long idStaff, long idTimeSheets) {
+	public void postTimeSheetsStaff(TimeSheetsStaff t, long idStaff) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
-		String sql = "insert into TimeSheetsStaff as tss values(0, tss.id)";
-		
+		ss.save(t);
+		String sql = "update TimeSheetsStaff as tss set tss.stafff.idStaff = :idStaff where tss.id = :id";
+		int result = ss.createQuery(sql).setParameter("idStaff", idStaff)
+										.setParameter("id", t.getId()).executeUpdate();
+		tr.commit();
+		ss.close();
 	}
 }
