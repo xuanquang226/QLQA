@@ -24,8 +24,8 @@ public class RestTimeSheetsStaff {
 	private DAOTimeSheetsStaff daoTimeSheetsStaff;
 	
 	@PostMapping
-	public void postTimeSeetsStaff(@RequestBody TimeSheetsStaff t) {
-		daoTimeSheetsStaff.post(t);
+	public void postTimeSheetsStaff(@RequestBody TimeSheetsStaff timeSheetsStaff) {
+		daoTimeSheetsStaff.post(timeSheetsStaff);
 	}
 	
 	@GetMapping
