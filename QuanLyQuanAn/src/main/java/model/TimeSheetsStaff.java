@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
@@ -28,9 +29,11 @@ public class TimeSheetsStaff {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@JsonManagedReference
 	@ManyToOne
 	private TimeSheets timeSheets;
 	
+	@JsonManagedReference
 	@ManyToOne
 	private Staff stafff;
 	

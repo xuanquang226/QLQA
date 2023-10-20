@@ -48,11 +48,21 @@ public class DAOTimeSheet implements DAOCRUDInterface<TimeSheets> {
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 
-		ss.save(t);
+		ss.saveOrUpdate(t);
 		
 		tr.commit();
 		ss.close();
 	}
 
 	
+	public long postAndGetID(TimeSheets t) {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		ss.saveOrUpdate(t);
+		tr.commit();
+		ss.close();
+		return t.getId();
+	}
 }

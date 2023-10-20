@@ -29,4 +29,9 @@ public class RestTimeSheets {
 	public void postTimeSheets(@RequestBody TimeSheets timesheet) {
 		daoTimeSheet.post(timesheet);
 	}
+	
+	@PostMapping("/getid")
+	public long postAndGetId(@RequestBody TimeSheets timeSheets) {
+		return daoTimeSheet.postAndGetID(timeSheets);
+	}
 }
