@@ -46,9 +46,9 @@ public class TimeSheets {
 	@JsonFormat(shape = JsonFormat.Shape.STRING ,pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
 	private Timestamp dateTimeKeeping;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "timeSheets", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<TimeSheetsStaff> setTimeSheetsStaff = new HashSet<TimeSheetsStaff>();
+	private Set<TimeSheetsStaff> setTimeSheetsStaff;
 	
 	public TimeSheets() {}
 

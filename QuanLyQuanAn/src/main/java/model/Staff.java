@@ -58,11 +58,13 @@ public class Staff {
 	@JoinColumn(name = "id_account")
 	private Account account;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "staff", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<PayrollStaff> setPayrollStaff = new HashSet<PayrollStaff>();
+	private Set<PayrollStaff> setPayrollStaff;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "stafff", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<TimeSheetsStaff> setTimeSheets = new HashSet<TimeSheetsStaff>();
+	private Set<TimeSheetsStaff> setTimeSheets;
 	
 	public Staff() {}
 
