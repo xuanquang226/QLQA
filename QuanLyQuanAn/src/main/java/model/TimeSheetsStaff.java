@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -29,11 +30,11 @@ public class TimeSheetsStaff {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@JsonManagedReference
+	@JsonBackReference
 	@ManyToOne
 	private TimeSheets timeSheets;
 	
-	@JsonManagedReference
+	
 	@ManyToOne
 	private Staff stafff;
 	

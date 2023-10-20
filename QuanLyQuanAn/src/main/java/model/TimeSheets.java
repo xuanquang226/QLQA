@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
@@ -44,7 +45,7 @@ public class TimeSheets {
 	@JsonFormat(shape = JsonFormat.Shape.STRING ,pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
 	private Timestamp dateTimeKeeping;
 	
-	@JsonBackReference
+	@JsonManagedReference
 	@OneToMany(mappedBy = "timeSheets", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<TimeSheetsStaff> setTimeSheetsStaff = new HashSet<TimeSheetsStaff>();
 	
