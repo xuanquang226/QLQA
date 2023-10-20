@@ -32,9 +32,11 @@ public class TimeSheetsStaff {
 	private long id;
 	
 	@ManyToOne
+	@JoinColumn(name = "id_timesheets")
 	private TimeSheets timeSheets;
 	
 	@ManyToOne
+	@JoinColumn(name = "id_staff")
 	private Staff stafff;
 	
 	@Column(name = "time_scan")
