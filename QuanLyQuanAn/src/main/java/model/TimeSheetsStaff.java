@@ -33,12 +33,10 @@ public class TimeSheetsStaff {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_timesheets")
-	@JsonBackReference
 	private TimeSheets timeSheets;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_staff")
-	@JsonBackReference
 	private Staff stafff;
 	
 	@Column(name = "time_scan")
