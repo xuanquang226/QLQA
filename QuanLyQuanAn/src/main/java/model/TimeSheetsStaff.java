@@ -25,7 +25,6 @@ import jakarta.persistence.Table;
 @Table(name = "timesheetstaff")
 @Component
 @JsonIdentityInfo(generator = ObjectIdGenerators.None.class, property = "id")
-@JsonIdentityReference(alwaysAsId = true)
 public class TimeSheetsStaff {
 	
 	@Id
