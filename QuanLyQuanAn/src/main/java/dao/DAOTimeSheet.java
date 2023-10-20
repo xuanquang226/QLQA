@@ -60,7 +60,7 @@ public class DAOTimeSheet implements DAOCRUDInterface<TimeSheets> {
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
-		ss.saveOrUpdate(t);
+		ss.save(t);
 		tr.commit();
 		ss.close();
 		return t.getId();
