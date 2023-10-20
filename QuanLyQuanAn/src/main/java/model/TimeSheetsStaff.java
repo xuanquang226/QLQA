@@ -25,17 +25,16 @@ import jakarta.persistence.Table;
 @Table(name = "timesheetstaff")
 @Component
 @JsonIdentityInfo(generator = ObjectIdGenerators.None.class, property = "id")
+@JsonIdentityReference(alwaysAsId = true)
 public class TimeSheetsStaff {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@JsonIdentityReference
 	@ManyToOne
 	private TimeSheets timeSheets;
 	
-	@JsonIdentityReference
 	@ManyToOne
 	private Staff stafff;
 	
