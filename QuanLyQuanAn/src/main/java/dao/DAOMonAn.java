@@ -15,11 +15,10 @@ import util.HibernateUtil;
 
 @Component
 public class DAOMonAn implements DAOCRUDInterface<Dish> {
-
+	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	@Override
 	public Dish get(long id) {
 		// Create session
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -34,7 +33,6 @@ public class DAOMonAn implements DAOCRUDInterface<Dish> {
 
 	@Override
 	public String put(Dish ma1, long id) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss =  sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -77,7 +75,6 @@ public class DAOMonAn implements DAOCRUDInterface<Dish> {
 
 	@Override
 	public void delete(long id) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -90,7 +87,6 @@ public class DAOMonAn implements DAOCRUDInterface<Dish> {
 
 	@Override
 	public void post(Dish t) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss =  sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -107,7 +103,6 @@ public class DAOMonAn implements DAOCRUDInterface<Dish> {
 	}
 	
 	public List<Dish> getListDish() {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -120,7 +115,6 @@ public class DAOMonAn implements DAOCRUDInterface<Dish> {
 	}
 	
 	public String putNameAQuantity(long id, Dish dish ) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		

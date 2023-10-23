@@ -12,10 +12,9 @@ import util.HibernateUtil;
 
 @Component
 public class DAODishOrder {
-	
+	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	
 	public List<DishOrder> getListDishOrder(){
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -29,7 +28,6 @@ public class DAODishOrder {
 	}
 	
 	public List<DishOrder> getListDishOrderWithIdOrder(long idOrder){
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		

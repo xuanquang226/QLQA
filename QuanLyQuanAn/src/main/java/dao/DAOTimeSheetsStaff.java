@@ -2,7 +2,9 @@ package dao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,11 +16,10 @@ import util.HibernateUtil;
 
 @Component
 public class DAOTimeSheetsStaff implements DAOCRUDInterface<TimeSheetsStaff> {
-
+	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
+	
 	@Override
 	public TimeSheetsStaff get(long id) {
-		// TODO Auto-generated method stub
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -46,7 +47,6 @@ public class DAOTimeSheetsStaff implements DAOCRUDInterface<TimeSheetsStaff> {
 	}
 
 	public List<TimeSheetsStaff> getList(){
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 
@@ -61,8 +61,7 @@ public class DAOTimeSheetsStaff implements DAOCRUDInterface<TimeSheetsStaff> {
 		return lSheetsStaffs;
 	}
 	
-	public List<Integer> countTimeSheets(List<Long> listIdStaff){
-		SessionFactory sf = HibernateUtil.getSessionFactory();
+	public Map<String, Integer> countTimeSheets(List<Long> listIdStaff){
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -71,14 +70,14 @@ public class DAOTimeSheetsStaff implements DAOCRUDInterface<TimeSheetsStaff> {
 		int year = timestamp.getYear() + 1900;
 		
 		List<TimeSheetsStaff> lSheetsStaffs = new ArrayList<TimeSheetsStaff>();
-		List<Integer> lCount = new ArrayList<Integer>();
+		Map<String, Integer> lCount = new HashMap<>();
 		String sql = "from TimeSheetsStaff as tss where MONTH(timestamp) = :month and YEAR(timestamp) = :year and tss.stafff.idStaff = :idStaff";
 		for(int i = 0; i < listIdStaff.size(); i++) {
 				lSheetsStaffs = ss.createQuery(sql, TimeSheetsStaff.class).setParameter("month", month)
 													.setParameter("year", year)
 													.setParameter("idStaff", listIdStaff.get(i))
 													.list();
-				lCount.add(lSheetsStaffs.size());
+				lCount.put("Nhân viên " + listIdStaff.get(i), lSheetsStaffs.size());
 		}
 		
 		
@@ -90,7 +89,6 @@ public class DAOTimeSheetsStaff implements DAOCRUDInterface<TimeSheetsStaff> {
 	}
 	
 	public void postTimeSheetsStaff(TimeSheetsStaff t, long idStaff) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -100,5 +98,40 @@ public class DAOTimeSheetsStaff implements DAOCRUDInterface<TimeSheetsStaff> {
 										.setParameter("id", t.getId()).executeUpdate();
 		tr.commit();
 		ss.close();
+	}
+	
+	public boolean checkTimeKeeping(long idStaff) {
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        int day = timestamp.getDate();
+        int month = timestamp.getMonth() + 1;
+        int year = timestamp.getYear() + 1900;
+        Map<String, Integer> date = new HashMap<>();
+        date.put("day", day);
+        date.put("month", month);
+        date.put("year", year);
+		
+		
+		String sql = "from TimeSheetsStaff as tss where DAY(tss.timestamp) = :day and MONTH(tss.timestamp) = :month and "
+				+ "YEAR(tss.timestamp) = :year and tss.stafff.idStaff = :idStaff";
+		TimeSheetsStaff tss = ss.createQuery(sql, TimeSheetsStaff.class).setParameter("day", date.get("day"))
+																		.setParameter("month", date.get("month"))
+																		.setParameter("year", date.get("year"))
+																		.setParameter("idStaff", idStaff)
+																		.setMaxResults(1)
+																		.uniqueResult();
+	
+		tr.commit();
+		boolean isExist = false;
+		
+		if(tss == null) {
+			isExist = false;
+		}else {
+			isExist = true;
+		}
+		ss.close();
+		return isExist;
 	}
 }

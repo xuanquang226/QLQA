@@ -18,10 +18,10 @@ import util.HibernateUtil;
 
 @Component
 public class DAOOrder implements DAOCRUDInterface<Order> {
-
+	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
+	
 	@Override
 	public Order get(long id) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -34,7 +34,6 @@ public class DAOOrder implements DAOCRUDInterface<Order> {
 
 	@Override
 	public String put(Order t, long id) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -56,7 +55,6 @@ public class DAOOrder implements DAOCRUDInterface<Order> {
 	}
 	
 	public long createOrder(Order order, long idStaff, long idDinnerTable) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 

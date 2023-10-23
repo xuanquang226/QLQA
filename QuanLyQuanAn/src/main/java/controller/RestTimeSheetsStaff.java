@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -33,8 +34,13 @@ public class RestTimeSheetsStaff {
 		return daoTimeSheetsStaff.getList();
 	}
 	
-	@GetMapping(value = "/count")
-	public List<Integer> countTimeSheetsStaff(@RequestParam List<Long> idStaff) {
+	@GetMapping("/count")
+	public Map<String, Integer> countTimeSheetsStaff(@RequestParam List<Long> idStaff) {
 		return daoTimeSheetsStaff.countTimeSheets(idStaff);
+	}
+	
+	@GetMapping("/check/{idStaff}")
+	public boolean checkTimeKeeping(@PathVariable long idStaff) {
+		return daoTimeSheetsStaff.checkTimeKeeping(idStaff);
 	}
 }
