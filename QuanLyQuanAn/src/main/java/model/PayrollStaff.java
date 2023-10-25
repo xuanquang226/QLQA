@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,6 +31,9 @@ public class PayrollStaff {
 	private Staff staff;
 	
 	private double salary;
+	
+	@Column(name = "count_workday")
+	private Integer countWork;
 	
 	public PayrollStaff() {}
 
@@ -68,6 +72,14 @@ public class PayrollStaff {
 
 	public void setSalary(double salary) {
 		this.salary = salary;
+	}
+
+	public Integer getCount() {
+		return countWork;
+	}
+
+	public void setCount(Integer countWork) {
+		this.countWork = countWork;
 	}
 	
 	

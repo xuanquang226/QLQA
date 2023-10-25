@@ -61,43 +61,57 @@ public class DAOTimeSheetsStaff implements DAOCRUDInterface<TimeSheetsStaff> {
 		return lSheetsStaffs;
 	}
 	
-	public Map<String, Integer> countTimeSheets(List<Long> listIdStaff){
+//	public Map<String, Integer> countTimeSheets(List<Long> listIdStaff){
+//		Session ss = sf.openSession();
+//		Transaction tr = ss.beginTransaction();
+//		
+//		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//		int month = timestamp.getMonth() + 1;
+//		int year = timestamp.getYear() + 1900;
+//		
+//		List<TimeSheetsStaff> lSheetsStaffs = new ArrayList<TimeSheetsStaff>();
+//		Map<String, Integer> lCount = new HashMap<>();
+//		String sql = "from TimeSheetsStaff as tss where MONTH(timestamp) = :month and YEAR(timestamp) = :year and tss.stafff.idStaff = :idStaff";
+//		for(int i = 0; i < listIdStaff.size(); i++) {
+//				lSheetsStaffs = ss.createQuery(sql, TimeSheetsStaff.class).setParameter("month", month)
+//													.setParameter("year", year)
+//													.setParameter("idStaff", listIdStaff.get(i))
+//													.list();
+//				lCount.put("Nhân viên " + listIdStaff.get(i), lSheetsStaffs.size());
+//		}
+//		
+//		
+//			
+//		tr.commit();
+//		ss.close();
+//		
+//		return lCount;
+//	}
+	
+	public String postTimeSheetsStaff(TimeSheetsStaff t, long idStaff) {
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		int month = timestamp.getMonth() + 1;
-		int year = timestamp.getYear() + 1900;
+		int hour = timestamp.getHours();
+		String message = "";
+		t.setTimestamp(timestamp);
+	
 		
-		List<TimeSheetsStaff> lSheetsStaffs = new ArrayList<TimeSheetsStaff>();
-		Map<String, Integer> lCount = new HashMap<>();
-		String sql = "from TimeSheetsStaff as tss where MONTH(timestamp) = :month and YEAR(timestamp) = :year and tss.stafff.idStaff = :idStaff";
-		for(int i = 0; i < listIdStaff.size(); i++) {
-				lSheetsStaffs = ss.createQuery(sql, TimeSheetsStaff.class).setParameter("month", month)
-													.setParameter("year", year)
-													.setParameter("idStaff", listIdStaff.get(i))
-													.list();
-				lCount.put("Nhân viên " + listIdStaff.get(i), lSheetsStaffs.size());
+		if(hour > 8 && hour < 18) {
+			ss.save(t);
+			String sql = "update TimeSheetsStaff as tss set tss.stafff.idStaff = :idStaff where tss.id = :id";
+			int result = ss.createQuery(sql).setParameter("idStaff", idStaff)
+											.setParameter("id", t.getId()).executeUpdate();
+			tr.commit();
+			message = "Chấm công thành công";
+		}else {
+			message = "Không trong thời gian chấm công";
 		}
 		
 		
-			
-		tr.commit();
 		ss.close();
-		
-		return lCount;
-	}
-	
-	public void postTimeSheetsStaff(TimeSheetsStaff t, long idStaff) {
-		Session ss = sf.openSession();
-		Transaction tr = ss.beginTransaction();
-		
-		ss.save(t);
-		String sql = "update TimeSheetsStaff as tss set tss.stafff.idStaff = :idStaff where tss.id = :id";
-		int result = ss.createQuery(sql).setParameter("idStaff", idStaff)
-										.setParameter("id", t.getId()).executeUpdate();
-		tr.commit();
-		ss.close();
+		return message;
 	}
 	
 	public boolean checkTimeKeeping(long idStaff) {

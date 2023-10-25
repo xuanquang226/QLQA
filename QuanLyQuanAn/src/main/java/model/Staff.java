@@ -40,11 +40,9 @@ public class Staff {
 	@Column(name = "name_staff")
 	private String nameStaff;
 	
-	@Column(name = "working_hours")
-	private float workingHours;
 	
-	@Column(name = "ohour_salary")
-	private float oHourSalary;
+	@Column(name = "oday_salary")
+	private double oDaySalary;
 	
 	@Column(name = "position")
 	private String position;
@@ -68,11 +66,10 @@ public class Staff {
 	
 	public Staff() {}
 
-	public Staff(long idStaff, String nameStaff, float workingHours, float oHourSalary, String position, Account account) {
+	public Staff(long idStaff, String nameStaff, float workingHours, float oDaySalary, String position, Account account) {
 		this.idStaff = idStaff;
 		this.nameStaff = nameStaff;
-		this.workingHours = workingHours;
-		this.oHourSalary = oHourSalary;
+		this.oDaySalary = oDaySalary;
 		this.position = position;
 		this.account = account;
 	}
@@ -93,20 +90,13 @@ public class Staff {
 		this.nameStaff = nameStaff;
 	}
 
-	public float getWorkingHours() {
-		return workingHours;
+
+	public double getoDaySalary() {
+		return oDaySalary;
 	}
 
-	public void setWorkingHours(float workingHours) {
-		this.workingHours = workingHours;
-	}
-
-	public float getoHourSalary() {
-		return oHourSalary;
-	}
-
-	public void setoHourSalary(float oHourSalary) {
-		this.oHourSalary = oHourSalary;
+	public void setoDaySalary(double oDaySalary) {
+		this.oDaySalary = oDaySalary;
 	}
 
 	public String getPosition() {

@@ -25,8 +25,8 @@ public class RestTimeSheetsStaff {
 	private DAOTimeSheetsStaff daoTimeSheetsStaff;
 	
 	@PostMapping
-	public void postTimeSheetsStaff(@RequestBody TimeSheetsStaff timeSheetsStaff, @RequestParam long idStaff) {
-		daoTimeSheetsStaff.postTimeSheetsStaff(timeSheetsStaff, idStaff);
+	public String postTimeSheetsStaff(@RequestBody TimeSheetsStaff timeSheetsStaff, @RequestParam long idStaff) {
+		return daoTimeSheetsStaff.postTimeSheetsStaff(timeSheetsStaff, idStaff);
 	}
 	
 	@GetMapping
@@ -34,10 +34,10 @@ public class RestTimeSheetsStaff {
 		return daoTimeSheetsStaff.getList();
 	}
 	
-	@GetMapping("/count")
-	public Map<String, Integer> countTimeSheetsStaff(@RequestParam List<Long> idStaff) {
-		return daoTimeSheetsStaff.countTimeSheets(idStaff);
-	}
+//	@GetMapping("/count")
+//	public Map<String, Integer> countTimeSheetsStaff(@RequestParam List<Long> idStaff) {
+//		return daoTimeSheetsStaff.countTimeSheets(idStaff);
+//	}
 	
 	@GetMapping("/check/{idStaff}")
 	public boolean checkTimeKeeping(@PathVariable long idStaff) {
