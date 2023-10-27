@@ -40,7 +40,7 @@ public class TimeSheetsStaff {
 	private Staff stafff;
 	
 	@Column(name = "time_scan")
-	@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
+	@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS", timezone = "Asia/Jakarta")
 	private Timestamp timestamp;
 
 	public TimeSheetsStaff(){}

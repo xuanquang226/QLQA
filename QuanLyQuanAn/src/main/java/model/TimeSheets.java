@@ -44,7 +44,7 @@ public class TimeSheets {
 	private long id;
 	
 	@Column(name = "date_timekeeping")
-	@JsonFormat(shape = JsonFormat.Shape.STRING ,pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
+	@JsonFormat(shape = JsonFormat.Shape.STRING ,pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS", timezone = "Asia/Jakarta")
 	private Timestamp dateTimeKeeping;
 	
 	@JsonIgnore

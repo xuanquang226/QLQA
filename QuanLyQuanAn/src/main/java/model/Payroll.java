@@ -50,7 +50,7 @@ public class Payroll {
 	
 	
 	@Column(name = "date_payroll")
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS", shape = Shape.STRING)
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS", shape = Shape.STRING, timezone = "Asia/Jakarta")
 	private Timestamp dateCreatePayroll;
 	
 	@JsonIgnore

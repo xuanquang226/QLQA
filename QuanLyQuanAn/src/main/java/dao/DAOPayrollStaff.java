@@ -24,8 +24,13 @@ public class DAOPayrollStaff implements DAOCRUDInterface<PayrollStaff> {
 	
 	@Override
 	public PayrollStaff get(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		PayrollStaff prs = ss.get(PayrollStaff.class, id);
+		tr.commit();
+		ss.close();
+		return prs;
 	}
 
 	@Override
@@ -123,4 +128,17 @@ public class DAOPayrollStaff implements DAOCRUDInterface<PayrollStaff> {
 		ss.close();
 	}
 
+	public List<PayrollStaff> getListPayrollStaff(long idPayroll){
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		String sql = "from PayrollStaff where payroll.id = :idPayroll";
+		List<PayrollStaff> payrollStaffList = ss.createQuery(sql, PayrollStaff.class).setParameter("idPayroll", idPayroll).getResultList();
+		
+		tr.commit();
+		ss.close();
+		
+		return payrollStaffList;
+	}
+	
 }

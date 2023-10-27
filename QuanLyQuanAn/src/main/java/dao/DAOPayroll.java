@@ -76,5 +76,20 @@ public class DAOPayroll implements DAOCRUDInterface<Payroll> {
 		ss.close();
 		return idPayroll;
 	}
+	
+	public long queryPayrollAndGetIdPayroll(int month, int year) {
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		String sql = "from Payroll as pr where MONTH(dateCreatePayroll) = :month and YEAR(dateCreatePayroll) = :year";
+		Payroll pr = ss.createQuery(sql, Payroll.class).setParameter("month", month)
+															.setParameter("year", year)
+															.uniqueResult();
+		long idPayroll = pr.getId();
+		
+		tr.commit();
+		ss.close();
+		return idPayroll;
+	}
 
 }

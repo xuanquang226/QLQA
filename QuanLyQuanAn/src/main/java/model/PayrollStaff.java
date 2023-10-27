@@ -33,13 +33,14 @@ public class PayrollStaff {
 	private double salary;
 	
 	@Column(name = "count_workday")
-	private Integer countWork;
+	private int countWork;
 	
 	public PayrollStaff() {}
 
-	public PayrollStaff(long id, double salary) {
+	public PayrollStaff(long id, double salary, int countWork) {
 		this.id = id;
 		this.salary = salary;
+		this.countWork = countWork;
 	}
 
 	public long getId() {
@@ -74,11 +75,11 @@ public class PayrollStaff {
 		this.salary = salary;
 	}
 
-	public Integer getCount() {
+	public int getCount() {
 		return countWork;
 	}
 
-	public void setCount(Integer countWork) {
+	public void setCount(int countWork) {
 		this.countWork = countWork;
 	}
 	

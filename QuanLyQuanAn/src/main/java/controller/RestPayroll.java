@@ -36,4 +36,10 @@ public class RestPayroll {
 	public long postAndGetIDPayroll(@RequestBody Payroll pr) {
 		return daoPayroll.postAndGetIDPayroll(pr);
 	}
+	
+	@GetMapping(value = "/getIdPayrollStaff")
+	public long queryPayrollAndGetIdPayroll(@RequestParam int month, @RequestParam int year) {
+		return daoPayroll.queryPayrollAndGetIdPayroll(month, year);
+	}
+	
 }
