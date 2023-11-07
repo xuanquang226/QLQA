@@ -4,7 +4,7 @@
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <!--property name="hibernate.connection.url">jdbc:mysql://root:C6XSeoBM0JjWoZg7aJuN@containers-us-west-93.railway.app:6088/railway</property>  -->
         <!--property name="hibernate.connection.password">C6XSeoBM0JjWoZg7aJuN</property>  -->
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/qlqa</property>
