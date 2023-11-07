@@ -2,9 +2,11 @@ package model;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,11 +32,15 @@ public class PayrollStaff {
 	
 	private double salary;
 	
+	@Column(name = "count_workday")
+	private int countWork;
+	
 	public PayrollStaff() {}
 
-	public PayrollStaff(long id, double salary) {
+	public PayrollStaff(long id, double salary, int countWork) {
 		this.id = id;
 		this.salary = salary;
+		this.countWork = countWork;
 	}
 
 	public long getId() {
@@ -67,6 +73,14 @@ public class PayrollStaff {
 
 	public void setSalary(double salary) {
 		this.salary = salary;
+	}
+
+	public int getCount() {
+		return countWork;
+	}
+
+	public void setCount(int countWork) {
+		this.countWork = countWork;
 	}
 	
 	

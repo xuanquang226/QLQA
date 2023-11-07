@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,4 +31,15 @@ public class RestTimeSheets {
 	public void postTimeSheets(@RequestBody TimeSheets timesheet) {
 		daoTimeSheet.post(timesheet);
 	}
+	
+	@PostMapping("/getid")
+	public long postAndGetId(@RequestBody TimeSheets timeSheets) {
+		return daoTimeSheet.postAndGetID(timeSheets);
+	}
+	
+	@GetMapping("/date")
+	public TimeSheets getTimeSheetsWithDate() {
+		return daoTimeSheet.getTimeSheetsWithDate();
+	}
+	
 }

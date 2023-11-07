@@ -14,10 +14,10 @@ import util.HibernateUtil;
 
 @Component
 public class DAOStaff implements DAOCRUDInterface<Staff> {
+	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	
 	@Override
 	public Staff get(long idAccount) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		String sql = "from Staff as s where s.account.idS = : idAccount";

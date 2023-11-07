@@ -63,7 +63,7 @@ public class Order {
 	private Staff staff;
 	
 	@Column(name = "date_create")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS", timezone = "Asia/Jakarta")
 	private Timestamp dateCreate;
 	
 

@@ -4,9 +4,12 @@ import java.sql.Timestamp;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
@@ -29,13 +32,15 @@ public class TimeSheetsStaff {
 	private long id;
 	
 	@ManyToOne
+	@JoinColumn(name = "id_timesheets")
 	private TimeSheets timeSheets;
 	
 	@ManyToOne
+	@JoinColumn(name = "id_staff")
 	private Staff stafff;
 	
 	@Column(name = "time_scan")
-	@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
+	@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS", timezone = "Asia/Jakarta")
 	private Timestamp timestamp;
 
 	public TimeSheetsStaff(){}

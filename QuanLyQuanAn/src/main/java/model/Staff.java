@@ -6,8 +6,11 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
@@ -37,11 +40,9 @@ public class Staff {
 	@Column(name = "name_staff")
 	private String nameStaff;
 	
-	@Column(name = "working_hours")
-	private float workingHours;
 	
-	@Column(name = "ohour_salary")
-	private float oHourSalary;
+	@Column(name = "oday_salary")
+	private double oDaySalary;
 	
 	@Column(name = "position")
 	private String position;
@@ -55,19 +56,20 @@ public class Staff {
 	@JoinColumn(name = "id_account")
 	private Account account;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "staff", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<PayrollStaff> setPayrollStaff = new HashSet<PayrollStaff>();
+	private Set<PayrollStaff> setPayrollStaff;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "stafff", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<TimeSheetsStaff> setTimeSheets = new HashSet<TimeSheetsStaff>();
+	private Set<TimeSheetsStaff> setTimeSheets;
 	
 	public Staff() {}
 
-	public Staff(long idStaff, String nameStaff, float workingHours, float oHourSalary, String position, Account account) {
+	public Staff(long idStaff, String nameStaff, float workingHours, float oDaySalary, String position, Account account) {
 		this.idStaff = idStaff;
 		this.nameStaff = nameStaff;
-		this.workingHours = workingHours;
-		this.oHourSalary = oHourSalary;
+		this.oDaySalary = oDaySalary;
 		this.position = position;
 		this.account = account;
 	}
@@ -88,20 +90,13 @@ public class Staff {
 		this.nameStaff = nameStaff;
 	}
 
-	public float getWorkingHours() {
-		return workingHours;
+
+	public double getoDaySalary() {
+		return oDaySalary;
 	}
 
-	public void setWorkingHours(float workingHours) {
-		this.workingHours = workingHours;
-	}
-
-	public float getoHourSalary() {
-		return oHourSalary;
-	}
-
-	public void setoHourSalary(float oHourSalary) {
-		this.oHourSalary = oHourSalary;
+	public void setoDaySalary(double oDaySalary) {
+		this.oDaySalary = oDaySalary;
 	}
 
 	public String getPosition() {

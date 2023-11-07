@@ -20,11 +20,11 @@ public class Account {
 	private long idS;
 	private String username;
 	private String password;
-	private boolean typeA;		
+	private Boolean typeA;		
 	public Account() {
 
 	}
-	public Account(long idS, String username, String password, boolean typeA) {
+	public Account(long idS, String username, String password, Boolean typeA) {
 		this.idS = idS;
 		this.username = username;
 		this.password = password;
@@ -48,10 +48,10 @@ public class Account {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public boolean isTypeA() {
+	public Boolean isTypeA() {
 		return typeA;
 	}
-	public void setTypeA(boolean typeA) {
+	public void setTypeA(Boolean typeA) {
 		this.typeA = typeA;
 	}
 	

@@ -13,9 +13,9 @@ import util.HibernateUtil;
 
 @Component
 public class DAOAccount {
+	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 
 	public Account login(String username, String password) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 
@@ -31,7 +31,6 @@ public class DAOAccount {
 	}
 
 	public Account addAccount(Account s) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 

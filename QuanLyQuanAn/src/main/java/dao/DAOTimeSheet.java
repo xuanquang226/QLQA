@@ -1,5 +1,10 @@
 package dao;
 
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,11 +15,12 @@ import util.HibernateUtil;
 
 @Component
 public class DAOTimeSheet implements DAOCRUDInterface<TimeSheets> {
+	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
+	
 
 	@Override
 	public TimeSheets get(long id) {
 		// TODO Auto-generated method stub
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -27,7 +33,6 @@ public class DAOTimeSheet implements DAOCRUDInterface<TimeSheets> {
 
 	@Override
 	public String put(TimeSheets t, long id) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -44,15 +49,50 @@ public class DAOTimeSheet implements DAOCRUDInterface<TimeSheets> {
 
 	@Override
 	public void post(TimeSheets t) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 
-		ss.save(t);
+		ss.saveOrUpdate(t);
 		
 		tr.commit();
 		ss.close();
 	}
 
 	
+	public long postAndGetID(TimeSheets t) {
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		ss.save(t);
+		tr.commit();
+		ss.close();
+		return t.getId();
+	}
+	
+	public TimeSheets getTimeSheetsWithDate() {
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        int day = timestamp.getDate();
+        int month = timestamp.getMonth() + 1;
+        int year = timestamp.getYear() + 1900;
+        Map<String, Integer> date = new HashMap<>();
+        
+        date.put("day", day);
+        date.put("month", month);
+        date.put("year", year);
+        
+		String sql = "from TimeSheets as ts where DAY(ts.dateTimeKeeping) = :day and MONTH(ts.dateTimeKeeping) = :month and YEAR(ts.dateTimeKeeping) = :year";
+		
+		TimeSheets timesheets = ss.createQuery(sql, TimeSheets.class).setParameter("day", date.get("day"))
+																	.setParameter("month", date.get("month"))
+																	.setParameter("year", date.get("year"))
+																	.setMaxResults(1)
+																	.uniqueResult();
+		tr.commit();
+		ss.close();
+		
+		return timesheets;
+	}
 }

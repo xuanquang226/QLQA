@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
@@ -49,12 +50,12 @@ public class Payroll {
 	
 	
 	@Column(name = "date_payroll")
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS", shape = Shape.STRING)
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS", shape = Shape.STRING, timezone = "Asia/Jakarta")
 	private Timestamp dateCreatePayroll;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "payroll", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<PayrollStaff> setStaff = new HashSet<PayrollStaff>();
+	private Set<PayrollStaff> setStaff;
 	
 	
 	public Payroll() {}

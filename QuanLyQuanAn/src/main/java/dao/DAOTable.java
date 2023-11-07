@@ -12,9 +12,9 @@ import util.HibernateUtil;
 
 @Component
 public class DAOTable {
+	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	
 	public List<DinnerTable> getInfoTable() {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -28,7 +28,6 @@ public class DAOTable {
 	}
 	
 	public void updateIdOrderForTable(long idTable, long idOrder) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		
@@ -39,7 +38,6 @@ public class DAOTable {
 	}
 	
 	public DinnerTable getTable(long idTable) {
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 		

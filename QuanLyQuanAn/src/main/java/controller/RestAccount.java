@@ -19,7 +19,7 @@ public class RestAccount {
 	@Autowired
 	public DAOAccount da;
 	
-	
+	// Authentication thành công trả về token token được lưu trên server và trên dth sau đó cứ vào app là tự lấy token so sánh với server để tải account về
 	@PostMapping(value = "/api/login")
 	public Account getUser(@RequestBody Account a){
 		return da.login(a.getUsername(), a.getPassword());		
