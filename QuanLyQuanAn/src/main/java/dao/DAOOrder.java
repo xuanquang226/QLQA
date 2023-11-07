@@ -26,7 +26,6 @@ public class DAOOrder implements DAOCRUDInterface<Order> {
 		Transaction tr = ss.beginTransaction();
 		
 		Order order = ss.get(Order.class, id);
-		
 		tr.commit();
 		ss.close();
 		return order;
