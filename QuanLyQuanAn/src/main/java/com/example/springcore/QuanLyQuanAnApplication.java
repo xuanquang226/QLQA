@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,11 +29,10 @@ import util.HibernateUtil;
 
 
 @SpringBootApplication
-@ComponentScan(value= "controller")
+@ComponentScan(value= {"controller", "security", "config"})
 public class QuanLyQuanAnApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(QuanLyQuanAnApplication.class, args);	
-		
 	}
 
 }

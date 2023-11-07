@@ -20,7 +20,7 @@ public class DAOStaff implements DAOCRUDInterface<Staff> {
 	public Staff get(long idAccount) {
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
-		String sql = "from Staff as s where s.account.idS = : idAccount";
+		String sql = "from Staff as s where s.account.id = : idAccount";
 		Staff s1 = ss.createQuery(sql, Staff.class).setParameter("idAccount", idAccount).uniqueResult();
 		tr.commit();
 		ss.close();
