@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dao.DAOAccount;
 import dao.DAORole;
 import dto.TupleDTO;
+import jakarta.servlet.http.HttpServletRequest;
 import model.Account;
 import model.Role;
 import security.JwtProvider;
@@ -90,7 +92,13 @@ public class RestAccount {
 	}
 
 	@PostMapping(value = "/api/get")
-	public Account getAccountt(@RequestParam String username) {
+	public Account getAccountt(HttpServletRequest request) {
+		String bearerToken = request.getHeader("Authorization");
+		String token = "";
+		if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+			token = bearerToken.substring(7, bearerToken.length());
+		}
+		String username = jwtProvider.getUsernameFromJwt(token);		
 		return da.getAccount(username);
 	}
 }

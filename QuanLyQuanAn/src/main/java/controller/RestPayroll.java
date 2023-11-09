@@ -42,4 +42,8 @@ public class RestPayroll {
 		return daoPayroll.queryPayrollAndGetIdPayroll(month, year);
 	}
 	
+	@GetMapping(value ="/checkPayrollExist")
+	public boolean checkPayrollExist(@RequestParam int month, @RequestParam int year) {
+		return daoPayroll.checkPayrollExist(month, year);
+	}
 }
