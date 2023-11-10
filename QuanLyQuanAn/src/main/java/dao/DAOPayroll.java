@@ -69,7 +69,7 @@ public class DAOPayroll implements DAOCRUDInterface<Payroll> {
 		Transaction tr = ss.beginTransaction();
 		
 	
-		ss.save(pr);
+		ss.saveOrUpdate(pr);
 		long idPayroll = pr.getId();
 			
 		tr.commit();
@@ -85,11 +85,32 @@ public class DAOPayroll implements DAOCRUDInterface<Payroll> {
 		Payroll pr = ss.createQuery(sql, Payroll.class).setParameter("month", month)
 															.setParameter("year", year)
 															.uniqueResult();
-		long idPayroll = pr.getId();
+		long idPayroll = 0;
+		if(pr != null) {
+			idPayroll = pr.getId();
+		}
 		
 		tr.commit();
 		ss.close();
 		return idPayroll;
+	}
+	
+	public boolean checkPayrollExist(int month, int year) {
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		String sql = "from Payroll as pr where MONTH(dateCreatePayroll) = :month and YEAR(dateCreatePayroll) = :year";
+		Payroll pr = ss.createQuery(sql, Payroll.class).setParameter("month", month)
+															.setParameter("year", year)
+															.uniqueResult();
+		tr.commit();
+		ss.close();
+		if(pr != null) {
+			return true;
+		}else {
+			return false;
+		}
+				
 	}
 
 }

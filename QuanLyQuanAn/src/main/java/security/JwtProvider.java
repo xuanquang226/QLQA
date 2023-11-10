@@ -15,11 +15,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtProvider {
 	
 	private final String JWT_SECRET = "quanggg";
-	private final long JWT_EXPIRE = 604800L;
+	private final long JWT_EXPIRE = 240000L;
 	
 	public String generateJWT(Authentication auth) {
 		Date currentDate = new Date();
 		Date expiredDate = new Date(currentDate.getTime() + JWT_EXPIRE);
+		System.out.println(currentDate.getTime());
 		String subject = auth.getName();
 		
 		String token = Jwts.builder()
