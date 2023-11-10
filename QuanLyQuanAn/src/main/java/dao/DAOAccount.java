@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -12,48 +13,52 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import dto.TupleDTO;
 import jakarta.persistence.Query;
+import jakarta.servlet.http.HttpServletRequest;
 import model.Account;
+import model.Role;
+import security.JwtProvider;
 import util.HibernateUtil;
 
 @Component
 public class DAOAccount {
 	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	
-//	@Autowired
-//	private AuthenticationManager authenticationManager;
+	@Autowired
+	private DAORole dr;
+	
 
-//	public Account login(String username, String password) {
-//		Session ss = sf.openSession();
-//		Transaction tr = ss.beginTransaction();
-//
-//		String sql = "from Account as a where a.username = :username";
-//
-//		Account a = ss.createQuery(sql, Account.class).setParameter("username", username)
-//													.setParameter("password", password)
-//													.uniqueResult();
-//
-//		tr.commit();
-//		ss.close();
-//		return a;
-//	}
-
-	public Account addAccount(Account s) {
+	public String addAccount(Account a) {
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
 
-		ss.saveOrUpdate(s);
+		
+		Role role = dr.getRole("STAFF");
+
+		Account newAccount = a;
+		newAccount.setUsername(a.getUsername());
+		newAccount.setTypeA(false);
+		newAccount.setPassword(passwordEncoder().encode(a.getPassword()));
+		newAccount.setlRole(Collections.singletonList(role));
+		ss.saveOrUpdate(a);
 		
 		tr.commit();
 		ss.close();
-		return s;
+		return "Sign up success";
 	}
+	
 	
 	public Account getAccount(String username) {
 		Session ss = sf.openSession();
 		Transaction tr = ss.beginTransaction();
+				
 		
 		String sql = "from Account as a where a.username = :username";
 		Account a = ss.createQuery(sql, Account.class)
@@ -64,12 +69,8 @@ public class DAOAccount {
 		return a;
 	}
 	
-//	public ResponseEntity<String> login(Account account){
-//		Authentication auth = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(account.getUsername(), account.getPassword()));
-//		if(auth.isAuthenticated()) {
-//			SecurityContextHolder.getContext().setAuthentication(auth);
-//			return new ResponseEntity<String>("Login success", HttpStatus.OK);
-//		}
-//		return null;
-//	}
+	public PasswordEncoder passwordEncoder() {
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	}
+	
 }

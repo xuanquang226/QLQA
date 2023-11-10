@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dao.DAOAccount;
+import dao.DAOAcountLogin;
 import dao.DAORole;
 import dto.TupleDTO;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,73 +33,28 @@ import security.JwtProvider;
 @RestController
 @ComponentScan(value = { "dao" })
 public class RestAccount {
-
+	
+	private DAOAcountLogin daoAcountLogin;
 	private DAOAccount da;
-	private DAORole dr;
-	private AuthenticationManager authenticationManager;
-	private PasswordEncoder passwordEncoder;
-	private JwtProvider jwtProvider;
-
+	
 	@Autowired
-	public RestAccount(DAOAccount da, DAORole dr, AuthenticationManager authenticationManager,
-			PasswordEncoder passwordEncoder, JwtProvider jwtProvider) {
+	public RestAccount(DAOAcountLogin daoAcountLogin, DAOAccount da) {
+		this.daoAcountLogin = daoAcountLogin;
 		this.da = da;
-		this.dr = dr;
-		this.authenticationManager = authenticationManager;
-		this.passwordEncoder = passwordEncoder;
-		this.jwtProvider = jwtProvider;
 	}
 
-//	@PostMapping(value = "/api/login")
-//	public Account getUser(@RequestBody Account a, @RequestHeader("Authorization") String token) {
-//		return da.login(a.getUsername());
-//	}
-
-	@PostMapping(value = "/api/account")
-	public Account addAccount(@RequestBody Account b) {
-		return da.addAccount(b);
-	}
-
-	@PostMapping(value = "/api/login2")
-	public TupleDTO<String, Account> login(@RequestBody Account a) {
-		String token = "";
-		TupleDTO<String, Account> tokenAndAccount = new TupleDTO<>();
-		Authentication auth = this.authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(a.getUsername(), a.getPassword()));
-		if(auth.isAuthenticated()) {
-			SecurityContextHolder.getContext().setAuthentication(auth);
-			token = "Bearer " + jwtProvider.generateJWT(auth);
-			tokenAndAccount.setToken(token);
-			tokenAndAccount.setAccount(da.getAccount(a.getUsername()));
-			return tokenAndAccount;
-		}else {
-			return null;
-		}
+	@PostMapping(value = "/api/login")
+	public TupleDTO<String, Account> login(@RequestBody Account a) {		
+		return daoAcountLogin.login(a);
 	}
 
 	@PostMapping(value = "/api/signup")
-	public String signUp(@RequestBody Account a) {
-		Role role = dr.getRole("STAFF");
-
-		Account newAccount = a;
-		newAccount.setUsername(a.getUsername());
-		newAccount.setTypeA(false);
-		newAccount.setPassword(passwordEncoder.encode(a.getPassword()));
-		newAccount.setlRole(Collections.singletonList(role));
-
-		da.addAccount(newAccount);
-
-		return "Signup success";
+	public String signUp(@RequestBody Account a) {		
+		return da.addAccount(a);
 	}
 
 	@PostMapping(value = "/api/get")
-	public Account getAccountt(HttpServletRequest request) {
-		String bearerToken = request.getHeader("Authorization");
-		String token = "";
-		if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-			token = bearerToken.substring(7, bearerToken.length());
-		}
-		String username = jwtProvider.getUsernameFromJwt(token);		
-		return da.getAccount(username);
+	public Account getAccountFromHeader(HttpServletRequest request) {		
+		return daoAcountLogin.getAccountFromHeader(request);
 	}
 }
