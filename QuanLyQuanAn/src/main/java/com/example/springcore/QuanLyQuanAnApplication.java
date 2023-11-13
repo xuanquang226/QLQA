@@ -18,7 +18,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
-import config.IOCContainerMonAn;
 import controller.RestMonAn;
 import model.Order;
 import model.Account;

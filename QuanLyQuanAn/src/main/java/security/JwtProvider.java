@@ -20,7 +20,7 @@ public class JwtProvider {
 	public String generateJWT(Authentication auth) {
 		Date currentDate = new Date();
 		Date expiredDate = new Date(currentDate.getTime() + JWT_EXPIRE);
-		System.out.println(currentDate.getTime());
+
 		String subject = auth.getName();
 		
 		String token = Jwts.builder()
@@ -43,7 +43,7 @@ public class JwtProvider {
 		}catch(MalformedJwtException ex) {
 			System.out.println("Invalid token");
 		}catch(ExpiredJwtException ex) {
-			System.out.println("Expired token");
+			System.out.println("Token expired");
 		}
 		return false;
 	}

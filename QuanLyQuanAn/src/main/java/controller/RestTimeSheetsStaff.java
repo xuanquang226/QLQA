@@ -17,7 +17,7 @@ import dao.DAOTimeSheetsStaff;
 import model.TimeSheetsStaff;
 
 @RestController
-@RequestMapping(value = "api/timesheetsStaff")
+@RequestMapping(value = "api/timesheets-staff")
 @ComponentScan({"dao"})
 public class RestTimeSheetsStaff {
 	
