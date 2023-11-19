@@ -17,7 +17,6 @@ import model.Account;
 import security.JwtProvider;
 import util.HibernateUtil;
 
-
 @Component
 public class DAOAcountLogin {
 	

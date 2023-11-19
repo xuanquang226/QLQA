@@ -8,8 +8,8 @@
         <!--property name="hibernate.connection.url">jdbc:mysql://root:C6XSeoBM0JjWoZg7aJuN@containers-us-west-93.railway.app:6088/railway</property>  -->
         <!--property name="hibernate.connection.password">C6XSeoBM0JjWoZg7aJuN</property>  -->
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/qlqa</property>
-        <property name="hibernate.connection.username">user</property>
-        <property name="hibernate.connection.password">password</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"></property>
         <property name="hibernate.connection.host"></property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>

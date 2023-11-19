@@ -31,7 +31,6 @@ import model.Role;
 import security.JwtProvider;
 
 @RestController
-@ComponentScan(value = { "dao" })
 public class RestAccount {
 	
 	private DAOAcountLogin daoAcountLogin;
@@ -53,7 +52,7 @@ public class RestAccount {
 		return da.addAccount(a);
 	}
 
-	@PostMapping(value = "/api/get")
+	@PostMapping(value = "/api/account")
 	public Account getAccountFromHeader(HttpServletRequest request) {		
 		return daoAcountLogin.getAccountFromHeader(request);
 	}

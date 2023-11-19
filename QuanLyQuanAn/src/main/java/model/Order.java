@@ -36,9 +36,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
-
 @Entity
-@Component
 @Table(name="orderr")
 @JsonIdentityInfo(generator=ObjectIdGenerators.None.class, property="id")
 public class Order {

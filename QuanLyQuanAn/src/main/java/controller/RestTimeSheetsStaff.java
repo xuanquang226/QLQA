@@ -18,7 +18,6 @@ import model.TimeSheetsStaff;
 
 @RestController
 @RequestMapping(value = "api/timesheets-staff")
-@ComponentScan({"dao"})
 public class RestTimeSheetsStaff {
 	
 	@Autowired

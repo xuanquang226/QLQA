@@ -17,7 +17,6 @@ import jakarta.persistence.Table;
 
 @Entity(name="Account")
 @Table(name="account")
-@Component
 public class Account {
 	
 	@Id

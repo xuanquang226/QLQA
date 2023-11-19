@@ -17,7 +17,6 @@ import dao.DAOMonAn;
 import model.Dish;
 
 @RestController
-@ComponentScan(value = {"dao"})
 public class RestMonAn {
 
 	@Autowired

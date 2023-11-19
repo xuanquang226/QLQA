@@ -10,7 +10,6 @@ import dao.DAOStaff;
 import model.Staff;
 
 @RestController
-@ComponentScan(value = {"dao"})
 public class RestStaff {
 	
 	@Autowired

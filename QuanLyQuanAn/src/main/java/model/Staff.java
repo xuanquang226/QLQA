@@ -29,7 +29,6 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "staff")
-@Component
 @JsonIdentityInfo(generator = ObjectIdGenerators.None.class, property = "idStaff")
 public class Staff {
 	

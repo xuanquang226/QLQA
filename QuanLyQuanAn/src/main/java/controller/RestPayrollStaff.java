@@ -16,7 +16,6 @@ import model.PayrollStaff;
 
 @RestController
 @RequestMapping(value = "/api/payrollstaff")
-@ComponentScan(value = {"dao"})
 public class RestPayrollStaff {
 
 	@Autowired

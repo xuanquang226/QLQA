@@ -14,7 +14,6 @@ import dao.DAOTable;
 import model.DinnerTable;
 
 @RestController
-@ComponentScan(value = {"dao"})
 public class RestTable {
 
 	@Autowired

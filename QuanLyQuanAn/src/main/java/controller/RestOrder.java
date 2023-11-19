@@ -15,7 +15,6 @@ import model.Dish;
 import model.Order;
 
 @RestController
-@ComponentScan(value = {"dao"})
 public class RestOrder {
 
 	@Autowired

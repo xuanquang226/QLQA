@@ -23,7 +23,6 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "timesheetstaff")
-@Component
 @JsonIdentityInfo(generator = ObjectIdGenerators.None.class, property = "id")
 public class TimeSheetsStaff {
 	

@@ -7,7 +7,6 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "guest")
-@Component
 public class Guest {
 	private int idKH;
 	private String name;

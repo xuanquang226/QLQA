@@ -20,12 +20,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.OneToOne;
 
 @Entity(name ="DinnerTable")
-@jakarta.persistence.Table(name= "dinnertable")
-@Component
-
+@Table(name= "dinnertable")
 public class DinnerTable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
