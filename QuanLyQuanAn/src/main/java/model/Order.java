@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -65,7 +66,8 @@ public class Order {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS", timezone = "Asia/Jakarta")
 	private Timestamp dateCreate;
 	
-
+	@Column(name = "state")
+	@Nullable
 	private boolean state;
 	
 	@Column(name= "total_price")
