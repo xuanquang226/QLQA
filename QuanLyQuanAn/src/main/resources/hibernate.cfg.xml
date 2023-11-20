@@ -5,8 +5,8 @@
 <hibernate-configuration>
     <session-factory>
     	<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://root:DgcaG6bh4bbfB31aAh2D3Adc6B--hB5d@mysql.railway.internal:3306/railway</property>
-        <property name="hibernate.connection.password">DgcaG6bh4bbfB31aAh2D3Adc6B--hB5d</property>
+        <property name="hibernate.connection.url">jdbc:mysql://root:heD1cAAAHfE25b5GeE-44gB-DE624FCF@mysql.railway.internal:3306/railway</property>
+        <property name="hibernate.connection.password">heD1cAAAHfE25b5GeE-44gB-DE624FCF</property>
 		<!--property name="hibernate.connection.url">jdbc:mysql://localhost:3306/qlqa</property>  -->
         <property name="hibernate.connection.username">root</property>
         <!--property name="hibernate.connection.password"></property>  -->
