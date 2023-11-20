@@ -13,7 +13,7 @@ import model.Dish;
 import util.HibernateUtil;
 
 
-@Component
+@Repository
 public class DAOMonAn implements DAOCRUDInterface<Dish> {
 	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	@Override

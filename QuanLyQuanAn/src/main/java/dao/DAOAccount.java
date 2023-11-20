@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -27,7 +28,7 @@ import model.Role;
 import security.JwtProvider;
 import util.HibernateUtil;
 
-@Component
+@Repository
 public class DAOAccount {
 	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	

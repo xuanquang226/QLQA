@@ -19,7 +19,7 @@ import model.Account;
 import model.Role;
 
 @Service
-@ComponentScan(value = {"dao"})
+@ComponentScan(basePackageClasses = DAOAccount.class)
 public class CustomUserDetailService implements UserDetailsService{
 	
 	@Autowired

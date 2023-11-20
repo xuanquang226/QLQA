@@ -122,7 +122,7 @@ public class Payroll {
 	public void setSetStaff(Set<PayrollStaff> setStaff) {
 		this.setStaff = setStaff;
 	}
-	
-	
+		
+		
 	
 }

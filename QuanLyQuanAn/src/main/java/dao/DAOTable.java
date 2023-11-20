@@ -2,15 +2,17 @@ package dao;
 
 import java.util.List;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import model.DinnerTable;
 import util.HibernateUtil;
 
-@Component
+@Repository
 public class DAOTable {
 	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	
