@@ -66,8 +66,7 @@ public class Order {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS", timezone = "Asia/Jakarta")
 	private Timestamp dateCreate;
 	
-	@Column(name = "state")
-	@Nullable
+	@Column(length = 1)
 	private boolean state;
 	
 	@Column(name= "total_price")

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import io.micrometer.common.lang.Nullable;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,8 +26,7 @@ public class Account {
 	private String username;
 	private String password;
 	
-	@Column(name = "type_account")
-	@Nullable
+	@Column(length = 1)
 	private boolean typeA;
 	
 	@ManyToMany(mappedBy = "lAccount", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
