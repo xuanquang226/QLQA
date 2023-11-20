@@ -24,14 +24,14 @@ public class Account {
 	private long id;
 	private String username;
 	private String password;
-	private Boolean typeA;
+	private boolean typeA;
 	
 	@ManyToMany(mappedBy = "lAccount", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Role> lRole = new ArrayList<Role>();
 	public Account() {
 
 	}
-	public Account(long id, String username, String password, Boolean typeA) {
+	public Account(long id, String username, String password, boolean typeA) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -55,10 +55,10 @@ public class Account {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Boolean isTypeA() {
+	public boolean isTypeA() {
 		return typeA;
 	}
-	public void setTypeA(Boolean typeA) {
+	public void setTypeA(boolean typeA) {
 		this.typeA = typeA;
 	}
 	public List<Role> getlRole() {

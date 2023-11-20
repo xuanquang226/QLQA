@@ -27,6 +27,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Table(name = "payroll")
@@ -123,6 +124,4 @@ public class Payroll {
 		this.setStaff = setStaff;
 	}
 		
-		
-	
 }
