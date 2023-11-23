@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -38,9 +39,14 @@ public class DAOAcountLogin {
 		TupleDTO<String, Account> tokenAndAccount = new TupleDTO<>();
 		Authentication auth = this.authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(a.getUsername(), a.getPassword()));
+
+		// Sau khi authenticate thành công thì sẽ lưu auth vào security context, trong auth có getName để trả về name of principle dùng để làm tham số cho subject() tạo jwt
 		if(auth.isAuthenticated()) {
-			SecurityContextHolder.getContext().setAuthentication(auth);
-			token = "Bearer " + jwtProvider.generateJWT(auth);
+			SecurityContext sc = SecurityContextHolder.getContext();
+			sc.setAuthentication(auth);
+
+			String subject = sc.getAuthentication().getName();
+			token = "Bearer " + jwtProvider.generateJWT(subject);
 			tokenAndAccount.setToken(token);
 			tokenAndAccount.setAccount(getAccount(a.getUsername()));
 			return tokenAndAccount;

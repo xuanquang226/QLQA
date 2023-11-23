@@ -17,19 +17,16 @@ public class JwtProvider {
 	private final String JWT_SECRET = "quanggg";
 	private final long JWT_EXPIRE = 240000L;
 	
-	public String generateJWT(Authentication auth) {
+	public String generateJWT(String subject) {
 		Date currentDate = new Date();
 		Date expiredDate = new Date(currentDate.getTime() + JWT_EXPIRE);
 
-		String subject = auth.getName();
-		
-		String token = Jwts.builder()
-							.setSubject(subject)
-							.setIssuedAt(currentDate)
-							.setExpiration(expiredDate)
-							.signWith(SignatureAlgorithm.HS512, JWT_SECRET)
-							.compact();
-		return token;
+		return Jwts.builder()
+				.setSubject(subject)
+				.setIssuedAt(currentDate)
+				.setExpiration(expiredDate)
+				.signWith(SignatureAlgorithm.HS512, JWT_SECRET)
+				.compact();
 	}
 	
 	public String getUsernameFromJwt(String token) {
