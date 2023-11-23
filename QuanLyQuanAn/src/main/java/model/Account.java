@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.Nullable;
@@ -16,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
+@Data
 @Entity(name="Account")
 @Table(name="account")
 public class Account {
@@ -31,46 +33,5 @@ public class Account {
 	
 	@ManyToMany(mappedBy = "lAccount", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Role> lRole = new ArrayList<Role>();
-	public Account() {
 
-	}
-	public Account(long id, String username, String password, boolean typeA) {
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.typeA = typeA;
-	}
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public boolean isTypeA() {
-		return typeA;
-	}
-	public void setTypeA(boolean typeA) {
-		this.typeA = typeA;
-	}
-	public List<Role> getlRole() {
-		return lRole;
-	}
-	public void setlRole(List<Role> lRole) {
-		this.lRole = lRole;
-	}
-	
-	
-	
 }

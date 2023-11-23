@@ -29,7 +29,7 @@ import model.Role;
 import security.JwtProvider;
 import util.HibernateUtil;
 
-@Repository
+@Component
 public class DAOAccount {
 	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	
@@ -48,7 +48,7 @@ public class DAOAccount {
 		newAccount.setUsername(a.getUsername());
 		newAccount.setTypeA(false);
 		newAccount.setPassword(passwordEncoder().encode(a.getPassword()));
-		newAccount.setlRole(Collections.singletonList(role));
+		newAccount.setLRole(Collections.singletonList(role));
 		ss.saveOrUpdate(a);
 		
 		tr.commit();

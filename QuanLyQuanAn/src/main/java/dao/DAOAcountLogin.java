@@ -18,7 +18,7 @@ import model.Account;
 import security.JwtProvider;
 import util.HibernateUtil;
 
-@Repository
+@Component
 public class DAOAcountLogin {
 	
 	private SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -53,7 +53,7 @@ public class DAOAcountLogin {
 		String bearerToken = request.getHeader("Authorization");
 		String token = "";
 		if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-			token = bearerToken.substring(7, bearerToken.length());
+			token = bearerToken.substring(7);
 		}
 		String username = jwtProvider.getUsernameFromJwt(token);		
 		return getAccount(username);

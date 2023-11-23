@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import model.Role;
 import util.HibernateUtil;
 
-@Repository
+@Component
 public class DAORole implements DAOCRUDInterface<Role>{
 	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	@Override

@@ -17,7 +17,7 @@ import model.Dish;
 import model.Order;
 import util.HibernateUtil;
 
-@Repository
+@Component
 public class DAOOrder implements DAOCRUDInterface<Order> {
 	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	

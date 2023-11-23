@@ -13,7 +13,7 @@ import model.Staff;
 import util.HibernateUtil;
 
 
-@Repository
+@Component
 public class DAOStaff implements DAOCRUDInterface<Staff> {
 	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	

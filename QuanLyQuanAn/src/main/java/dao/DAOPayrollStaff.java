@@ -18,7 +18,7 @@ import model.Staff;
 import model.TimeSheetsStaff;
 import util.HibernateUtil;
 
-@Repository
+@Component
 public class DAOPayrollStaff implements DAOCRUDInterface<PayrollStaff> {
 	
 	private static final SessionFactory sf = HibernateUtil.getSessionFactory();

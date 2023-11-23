@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -23,6 +24,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.OneToOne;
 
+@Data
 @Entity(name ="DinnerTable")
 @Table(name= "dinnertable")
 public class DinnerTable {
@@ -39,37 +41,6 @@ public class DinnerTable {
 	
 	@Column(name = "id_order")
 	private long idOrder;
-	
-	
-	public DinnerTable() {}
-	
-	public DinnerTable(long id, boolean stt) {
-		this.id = id;
-		this.stt = stt;
-	}
 
-	public long getID() {
-		return id;
-	}
-
-	public void setoNumber(long id) {
-		this.id = id;
-	}
-
-	public boolean isStt() {
-		return stt;
-	}
-
-	public void setStt(boolean stt) {
-		this.stt = stt;
-	}
-	
-	public void setIdOrder(long idOrder) {
-		this.idOrder = idOrder;
-	}
-	
-	public long getIdOrder() {
-		return idOrder;
-	}
 	
 }

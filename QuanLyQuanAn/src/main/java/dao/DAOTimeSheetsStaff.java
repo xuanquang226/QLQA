@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import model.TimeSheetsStaff;
 import util.HibernateUtil;
 
-@Repository
+@Component
 public class DAOTimeSheetsStaff implements DAOCRUDInterface<TimeSheetsStaff> {
 	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	

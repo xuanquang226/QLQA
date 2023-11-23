@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import model.DishOrder;
 import util.HibernateUtil;
 
-@Repository
+@Component
 public class DAODishOrder {
 	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	

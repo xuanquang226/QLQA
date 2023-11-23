@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import model.DinnerTable;
 import util.HibernateUtil;
 
-@Repository
+@Component
 public class DAOTable {
 	private static final SessionFactory sf = HibernateUtil.getSessionFactory();
 	

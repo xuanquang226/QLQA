@@ -26,7 +26,6 @@ import jakarta.persistence.Table;
 
 @Entity(name="Dish")
 @Table(name = "dish")
-@Scope("prototype")
 @JsonIdentityInfo(generator=ObjectIdGenerators.None.class, property="id")
 public class Dish {
 	
